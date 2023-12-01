@@ -1,5 +1,12 @@
+import '../../index.css'
+
 export default function Home(){
     return(
-        <h1>seja bem vindo a pagina Home</h1>
+        <section className='w-10/12'>
+            {/* navegacao dos produtos */}
+            <nav>
+
+            </nav>
+        </section>
     )
 }

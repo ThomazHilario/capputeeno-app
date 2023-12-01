@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.titulo{
+    font-family: 'Saira Stencil One', sans-serif;
+    font-weight:400;
+    font-size:40px;
+    color:rgba(93, 93, 109, 1);
+}
+
+/* header */
+header{
+    height:80px;
+}
