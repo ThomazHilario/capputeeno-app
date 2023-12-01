@@ -6,7 +6,7 @@ import Carrinho from '../Components/Carrinho'
 
 export default function RoutesNavegation(){
     return(
-        <main className='bg-gray-200 h-screen flex justify-center'>
+        <main className='bg-gray-200 h-100vh flex justify-center'>
             <Routes>
                 <Route path='/' element={ <Home/> }/>
                 <Route path='/produto/:id' element={ <Produto/> }/>
