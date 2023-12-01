@@ -1,7 +1,13 @@
+import { BrowserRouter } from 'react-router-dom'
+import RoutesNavegation from './Routes/routes'
+import './index.css'
+
 function App() {
   return (
     <>
-      <h1>hello world</h1>
+      <BrowserRouter>
+        <RoutesNavegation/>
+      </BrowserRouter>
     </>
   )
 }
