@@ -176,7 +176,7 @@ function Produto(props:ProdutoProps){
     const {img, name, price} = props
 
     return(
-        <div className='bg-gray-100 rounded-t-lg'>
+        <div className='produto bg-gray-100 rounded-t-lg'>
 
             {/* imagem do produto */}
             <img src={img} alt='imagem do produto' className='h-72 w-72 rounded-t-lg'/>
