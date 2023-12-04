@@ -276,6 +276,7 @@ function NavegationProgress(props:NavegationProps){
         })
     }
 
+    // Avancando na pagina
     function nextProgress(){
         // Armazenando cont na variavel value
         const value = cont
