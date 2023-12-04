@@ -14,6 +14,9 @@ interface Users {
 
 // Componente Home - Principal
 export default function Home(){
+    // variaveis para mudar a pagina
+    const [prev, setPrev] = useState<number>(0)
+    const [next, setNext] = useState<number>(12) 
 
     // State - lista
     const [lista,setLista] = useState<Users[]>([])
@@ -52,25 +55,31 @@ export default function Home(){
 
                 {/* navegacao dos produtos */}
                 <nav className='flex justify-between mt-8'>
+                    {/* buttons */}
                     <div className='flex gap-5'>
                         <Button name={'Todos os produtos'} lista={lista} setLista={setLista} />
                         <Button name={'Camisetas'} lista={lista} setLista={setLista} />
                         <Button name={'Canecas'} lista={lista} setLista={setLista} />
                     </div>
 
-                    <select name="filtro" id="filtro-de-selecao">
+                    {/* Filtro dos produtos */}
+                    <select name="filtro" id="filtro-de-selecao" className='w-40'>
                         <option value="default">Organizar por</option>
                         <option value="Menor preco">Preço: maior-menor</option>
                         <option value="maior preco">Preço: menor-maior</option>
                         <option value="maior preco">Mais vendidos</option>
                     </select>
+
+
                 </nav>
 
+                <NavegationProgress setPrev={setPrev} setNext={setNext} prev={prev} next={next}/>
+
                 {/* Container dos produtos listados */}
-                <div id='container_produtos' className='mt-12 mb-12 grid grid-cols-4 gap-8'>
+                <div id='container_produtos' className='mt-8 mb-12 grid grid-cols-4 gap-8'>
 
                     {/* Percorrendo cada produto */}
-                    {lista.slice(0,12).map((item, idx) => {return <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>})}
+                    {lista.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}
 
                 </div>
 
@@ -78,6 +87,7 @@ export default function Home(){
         )
    }
 }
+
 
 // Criando tipagem para as propriedades do button
 interface ButtonProps{
@@ -150,6 +160,8 @@ function Button(props:ButtonProps){
     return <button  className='first:border-2 border-b-amber-500' onClick={requestApi}>{name}</button>
 }
 
+// --------------------------------------
+
 
 // interface do Produto
 interface ProdutoProps{
@@ -178,3 +190,92 @@ function Produto(props:ProdutoProps){
         </div>
     )
 }
+
+// --------------------------------------
+
+
+// Componente NavegationProgress
+interface NavegationProps{
+    prev:number,
+    next:number,
+    setPrev:React.Dispatch<React.SetStateAction<number>>;
+    setNext:React.Dispatch<React.SetStateAction<number>>;
+}
+
+function NavegationProgress(props:NavegationProps){
+    // Desestruturando props
+    const {setPrev, prev ,setNext, next} = props
+
+    // State - contador
+    const [cont, setCont] = useState<number>(0)
+
+    // Usando o useEffect para verificar o contador
+    useEffect(() => {
+
+        // Caso contador seja abaixo de 0
+        if(cont < 0){
+            setCont(0)
+        }
+
+        // Caso contador seja maio que o total de buttons
+        if(cont > document.querySelectorAll('.step-button').length){
+            setCont(document.querySelectorAll('.step-button').length)
+        }
+
+
+    },[cont])
+
+    // Voltando na pagina
+    function prevProgress(){
+        // Incrementa no contador
+        setCont(cont - 1)
+
+        // Captura os buttons por meio do querySelector
+        const button = document.querySelectorAll<HTMLElement>('.step-button')
+
+        // Percorrendo cada button
+        button.forEach((button) => {
+            
+            
+            if(parseFloat(button.textContent as string) - 1 === cont){
+                button.style.backgroundColor = 'white'
+
+                setPrev(prev - 12)
+                setNext(next - 12)
+            }
+        })
+    }
+
+    function nextProgress(){
+        // Incrementa no contador
+        setCont(cont + 1)
+
+        // Captura os buttons
+        const button:NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.step-button')
+
+        // percorrendo array de buttons
+        button.forEach((button,idx) => {
+
+            // Caso o contador seja igual ao idx
+            if(cont === idx){
+                button.style.backgroundColor = 'blue'
+                setPrev(prev + 12)
+                setNext(next + 12)
+            }
+        })
+    }
+
+    return(
+        <div className='flex gap-1 justify-end mt-4' id='navegatinProgress'>
+            <button className='step-button-only bg-blue-500' disabled>1</button>
+            <button className='step-button'>2</button>
+            <button className='step-button'>3</button>
+            <button className='step-button'>4</button>
+            <button className='step-button'>5</button>
+            <button className='step-button-progress' id='step-prev' onClick={prevProgress}>&lsaquo;</button>
+            <button className='step-button-progress' id='step-next' onClick={nextProgress}>&rsaquo;</button>
+        </div>
+    )
+}
+
+// --------------------------------------
