@@ -235,6 +235,9 @@ function NavegationProgress(props:NavegationProps){
         // Captura os buttons por meio do querySelector
         const button = document.querySelectorAll<HTMLElement>('.step-button')
 
+        // Primeiroo step-button
+        const btnStepPrimary:HTMLElement = document.getElementById('step-button-only') as HTMLElement
+
         // Percorrendo cada button
         button.forEach((button,idx) => {
             
@@ -261,6 +264,9 @@ function NavegationProgress(props:NavegationProps){
                 button.style.border = '0px'
                 button.style.backgroundColor = 'rgb(203 213 225)'
 
+                // Alterando style do Primeiro step-button
+                btnStepPrimary.style.border = '1px solid orange'
+
             } else{
 
                 // Adicionando style ao step button
@@ -271,17 +277,24 @@ function NavegationProgress(props:NavegationProps){
     }
 
     function nextProgress(){
-        // 
+        // Armazenando cont na variavel value
         const value = cont
         
         // Captura os buttons
         const button:NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.step-button')
 
+        // Primeiro step-button
+        const btnStepPrimary:HTMLElement = document.getElementById('step-button-only') as HTMLElement
+
         // percorrendo array de buttons
         button.forEach((button,idx) => {
 
+            // Alterando oo border do primeiiiro button
+            btnStepPrimary.style.border = '0px'
+
             // Caso o contador seja igual ao idx
             if(value === idx){
+
 
                 // Incrementa no contador
                 setCont(cont + 1)

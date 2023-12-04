@@ -25,6 +25,8 @@ header{
 #step-button-only{
     width:30px;
     border-radius:3px;
+
+    border: 1px solid orange;
 }
 
 .step-button{
