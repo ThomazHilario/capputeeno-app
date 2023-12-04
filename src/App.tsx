@@ -28,13 +28,14 @@ function App() {
       }
     })
   }
-  
+
   return (
     <>
       <BrowserRouter>
 
         {/* header */}
         <header className='flex justify-between items-center pr-44 pl-44'>
+
           {/* titulo logo */}
           <Link to='/'><h1 className='titulo'>Capputeeno</h1></Link>
 
@@ -50,6 +51,7 @@ function App() {
               <Link to='/carrinho'><img src={bagIcon} alt='imagem do carrinho' className='cursor-pointer'/></Link>
             </div>
           </nav>
+          
         </header>
 
         <RoutesNavegation/>
