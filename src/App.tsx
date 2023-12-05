@@ -34,7 +34,7 @@ function App() {
       <BrowserRouter>
 
         {/* header */}
-        <header className='flex justify-between items-center pr-44 pl-44'>
+        <header className='flex justify-between items-center pr-44 pl-44' id='cabecalho'>
 
           {/* titulo logo */}
           <Link to='/'><h1 className='titulo'>Capputeeno</h1></Link>

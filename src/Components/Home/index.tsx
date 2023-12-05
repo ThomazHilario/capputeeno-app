@@ -1,5 +1,6 @@
 import '../../index.css'
 import {useState, useEffect } from 'react'
+import {useNavigate} from 'react-router-dom'
 
 // Interface da state lista
 interface Users {
@@ -51,7 +52,7 @@ export default function Home(){
 
    } else{
         return(
-            <section className='w-9/12'>
+            <section className='w-10/12'>
 
                 {/* navegacao dos produtos */}
                 <nav className='flex justify-between mt-8'>
@@ -174,19 +175,34 @@ interface ProdutoProps{
 function Produto(props:ProdutoProps){
     // Desestruturando propriedades do componente
     const {img, name, price} = props
+    
+    // Navigate
+    const navigate = useNavigate()
+
+    // navegando ate a pagina
+    function navegationPage(){
+
+        localStorage.setItem('@item',JSON.stringify({
+            image_url:img,
+            name:name,
+            price_in_cents:price
+        }))
+
+        navigate(`/produto/${name}/${price}`)
+    }
 
     return(
-        <div className='produto bg-gray-100 rounded-t-lg'>
+        <div className='produto bg-gray-100 rounded-t-lg' onClick={navegationPage}>
 
-            {/* imagem do produto */}
-            <img src={img} alt='imagem do produto' className='h-72 w-72 rounded-t-lg'/>
+                {/* imagem do produto */}
+                <img src={img} alt='imagem do produto' className='h-72 w-72 rounded-t-lg'/>
 
-            {/* Descricao dos produtos */}
-            <div id='descricao-dos-produtos' className='flex flex-col gap-2 p-3 '>
-                <p className='name_produto text-1xl'>{name}</p>
-                <hr/>
-                <p><strong>RS {Math.ceil(price / 80).toFixed(2).replace('.',',')}</strong></p>
-            </div>
+                {/* Descricao dos produtos */}
+                <div id='descricao-dos-produtos' className='flex flex-col gap-2 p-3 '>
+                    <p className='name_produto text-1xl'>{name}</p>
+                    <hr/>
+                    <p><strong>RS {Math.ceil(price / 80).toFixed(2).replace('.',',')}</strong></p>
+                </div>
         </div>
     )
 }
