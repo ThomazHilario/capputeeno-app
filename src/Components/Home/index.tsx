@@ -52,10 +52,10 @@ export default function Home(){
 
    } else{
         return(
-            <section className='w-10/12'>
+            <section className='w-4/12 md:w-8/12 lg:w-9/12'>
 
                 {/* navegacao dos produtos */}
-                <nav className='flex justify-between mt-8'>
+                <nav className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
                     <div className='flex gap-5'>
                         <Button name={'Todos os produtos'} lista={lista} setLista={setLista} />
@@ -64,7 +64,7 @@ export default function Home(){
                     </div>
 
                     {/* Filtro dos produtos */}
-                    <select name="filtro" id="filtro-de-selecao" className='w-40'>
+                    <select name="filtro" id="filtro-de-selecao" className='w-40 mt-4 md:mt-0'>
                         <option value="default">Organizar por</option>
                         <option value="Menor preco">Preço: maior-menor</option>
                         <option value="maior preco">Preço: menor-maior</option>
@@ -77,7 +77,7 @@ export default function Home(){
                 <NavegationProgress setPrev={setPrev} setNext={setNext} prev={prev} next={next}/>
 
                 {/* Container dos produtos listados */}
-                <div id='container_produtos' className='mt-8 mb-12 grid grid-cols-4 gap-8'>
+                <div id='container_produtos' className='mt-8 mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4' >
 
                     {/* Percorrendo cada produto */}
                     {lista.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}
@@ -333,7 +333,7 @@ function NavegationProgress(props:NavegationProps){
     }
 
     return(
-        <div className='flex gap-1 justify-end mt-4' id='navegatinProgress'>
+        <div className='flex gap-1 justify-start md:justify-end mt-4 lg:justify-end' id='navegatinProgress'>
             <button id='step-button-only' className='bg-slate-300'>1</button>
             <button className='step-button'>2</button>
             <button className='step-button'>3</button>
