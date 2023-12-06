@@ -52,7 +52,7 @@ export default function Home(){
 
    } else{
         return(
-            <section className='w-4/12 md:w-8/12 lg:w-9/12'>
+            <section className='w-6/12 md:w-8/12 lg:w-9/12'>
 
                 {/* navegacao dos produtos */}
                 <nav className='mt-8 flex flex-col md:flex-row justify-between'>
