@@ -1,5 +1,7 @@
+import {useContext, useEffect} from 'react'
 import { BrowserRouter, Link } from 'react-router-dom'
 import ContextCart from './Context/context'
+import { Context } from './Context/context'
 import RoutesNavegation from './Routes/routes'
 import bagIcon from './assets/bag_icons/bag32.png'
 import './index.css'

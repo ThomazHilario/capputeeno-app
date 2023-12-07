@@ -1,6 +1,7 @@
 import './mediaQueries.css'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import  {Link} from 'react-router-dom'
+import { Context } from '../../Context/context'
 
 
 interface Users {
@@ -33,6 +34,9 @@ export default function Produto(){
     // state do produto
     const [produto, setProduto] = useState<Users>()
 
+    // Função para adicionar produto ao localStorage
+    const { setCartValue } = useContext(Context)
+
     // Adicionando produto ao carrinho
     function addCart(){
 
@@ -44,6 +48,9 @@ export default function Produto(){
 
         // Jogandoo para dentro do cart o meu produto
         cart.push(produto as Users)
+        
+        // Setando valor na state global cartValue
+        setCartValue(JSON.parse(localStorage.getItem('@cartProduct') as string).length) 
 
         // Salvando as alterações na localStorage
         localStorage.setItem('@cartProduct',JSON.stringify(cart))
