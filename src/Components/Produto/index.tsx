@@ -33,6 +33,23 @@ export default function Produto(){
     // state do produto
     const [produto, setProduto] = useState<Users>()
 
+    // Adicionando produto ao carrinho
+    function addCart(){
+
+        // Pegando dados da localStorage.
+        const localStorageCart:unknown = localStorage.getItem('@cartProduct')
+
+        // Transformando os dados da localStorage de string para dados javascript.
+        const cart:Users[] = JSON.parse(localStorageCart as string)
+
+        // Jogandoo para dentro do cart o meu produto
+        cart.push(produto as Users)
+
+        // Salvando as alterações na localStorage
+        localStorage.setItem('@cartProduct',JSON.stringify(cart))
+    
+    }
+
     return(
         <section id='container_produto_details'>
 
@@ -69,7 +86,7 @@ export default function Produto(){
                         
                     </div>
                     
-                    <button  id='buttonAddCar' className='bg-blue-900 h-12 rounded-sm text-white font-bold'>Adicionar ao carrinho</button>
+                    <button  id='buttonAddCar' className='bg-blue-900 h-12 rounded-sm text-white font-bold' onClick={addCart}>Adicionar ao carrinho</button>
                 </div>
             </div>
         </section>
