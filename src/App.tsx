@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react'
+import { useContext } from 'react'
 import { BrowserRouter, Link } from 'react-router-dom'
 import ContextCart from './Context/context'
 import { Context } from './Context/context'
@@ -7,6 +7,8 @@ import bagIcon from './assets/bag_icons/bag32.png'
 import './index.css'
 
 function App() {
+
+  const {cartValue} = useContext(Context)
 
   // Função para pesquisar produto específico
   function seachProduct(value:string){
@@ -53,6 +55,7 @@ function App() {
               {/* icone carrinho de compras */}
               <div id='carrinho'>
                 <Link to='/carrinho'><img src={bagIcon} alt='imagem do carrinho' className='cursor-pointer'/></Link>
+                {cartValue ? cartValue.length : 0}
               </div>
             </nav>
             

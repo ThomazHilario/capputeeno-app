@@ -1,26 +1,34 @@
-import {createContext, useState, useEffect} from 'react'
+import {createContext,useEffect} from 'react'
 
-// Criando um contexto
-export const Context = createContext({
-    cartValue:0,
-    updateCart(value:number):void
-})
+interface ThemeChildren {
+    children:React.ReactNode
+}
+
+interface PropsCart{
+    cartValue:object[],
+}
+
+const cart:PropsCart = {
+    cartValue:JSON.parse(localStorage.getItem('@cartProduct') as string) ? JSON.parse(localStorage.getItem('@cartProduct') as string) : [],
+}
+
+// Criando Contexto
+export const Context = createContext<PropsCart>(cart)
+
+
 
 // Componente do contexto
-export default function ContextCart({children}){
+export default function ContextCart({children}:ThemeChildren){
 
-
-
-    // state - total de itens do carrinho
-    const [cartValue, setCartValue] = useState<number>(0)
-
-    const updateCart = (value:number):void => {
-        setCartValue(value)
-    }
+    useEffect(() => {
+        if(localStorage.getItem('@cartProduct') === null){
+            localStorage.setItem('@cartProduct',JSON.stringify([]))
+        }
+    },[])
 
     // retornando o context Provider
     return(
-        <Context.Provider value={{cartValue,updateCart}} >
+        <Context.Provider value={cart}>
             {children}
         </Context.Provider>
     )
