@@ -52,7 +52,7 @@ export default function Home(){
 
    } else{
         return(
-            <section className='w-6/12 md:w-8/12 lg:w-9/12'>
+            <section className='w-7/12 md:w-8/12 lg:w-9/12'>
 
                 {/* navegacao dos produtos */}
                 <nav className='mt-8 flex flex-col md:flex-row justify-between'>
@@ -193,7 +193,7 @@ function Produto({img,name,price}:ProdutoProps){
         <div className='produto bg-gray-100 rounded-t-lg' onClick={navegationPage}>
 
                 {/* imagem do produto */}
-                <img src={img} alt='imagem do produto' className='h-72 w-72 rounded-t-lg'/>
+                <img src={img} alt='imagem do produto' className='h-auto rounded-t-lg'/>
 
                 {/* Descricao dos produtos */}
                 <div id='descricao-dos-produtos' className='flex flex-col gap-2 p-3 '>
@@ -217,7 +217,7 @@ interface NavegationProps{
 }
 
 function NavegationProgress({prev, next, setPrev, setNext}:NavegationProps){
-    
+
     // State - contador
     const [cont, setCont] = useState<number>(0)
 
