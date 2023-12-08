@@ -20,7 +20,7 @@ export default function Home(){
     const [next, setNext] = useState<number>(12) 
 
     // State - lista
-    const [lista,setLista] = useState<Users[]>([])
+    const [lista, setLista] = useState<Users[]>([])
     
     // state - carregado
     const [carregado, setCarregado] = useState(false)
@@ -172,9 +172,7 @@ interface ProdutoProps{
 }
 
 // Componente Produto
-function Produto(props:ProdutoProps){
-    // Desestruturando propriedades do componente
-    const {img, name, price} = props
+function Produto({img,name,price}:ProdutoProps){
     
     // Navigate
     const navigate = useNavigate()
@@ -218,10 +216,8 @@ interface NavegationProps{
     setNext:React.Dispatch<React.SetStateAction<number>>;
 }
 
-function NavegationProgress(props:NavegationProps){
-    // Desestruturando props
-    const {setPrev, prev ,setNext, next} = props
-
+function NavegationProgress({prev, next, setPrev, setNext}:NavegationProps){
+    
     // State - contador
     const [cont, setCont] = useState<number>(0)
 

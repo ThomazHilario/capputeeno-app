@@ -7,6 +7,30 @@ import './index.css'
 
 function App() {
 
+
+  return (
+    <>
+      <ContextCart>
+        <BrowserRouter>
+
+          {/* Componente Header */}
+          <Header/>
+          
+          {/* Componente de rotas */}
+          <RoutesNavegation/>
+
+        </BrowserRouter>
+      </ContextCart>
+    </>
+  )
+}
+
+// Componente Header
+function Header(){
+
+  // Pegando a state global cartValue
+  const { cartValue } = UseCart()
+
   // Função para pesquisar produto específico
   function seachProduct(value:string){
     const produto = document.querySelectorAll<HTMLElement>('.produto')
@@ -31,27 +55,6 @@ function App() {
     })
   }
 
-
-  return (
-    <>
-      <ContextCart>
-        <BrowserRouter>
-
-          <Header seachProduct={seachProduct}/>
-
-          <RoutesNavegation/>
-        </BrowserRouter>
-      </ContextCart>
-    </>
-  )
-}
-
-// Componente Header
-function Header( {seachProduct} ){
-
-  // Pegando a state global cartValue
-  const { cartValue } = UseCart()
-
   return(
     <header className='flex justify-between items-center pr-44 pl-44' id='cabecalho'>
 
@@ -68,7 +71,7 @@ function Header( {seachProduct} ){
         {/* icone carrinho de compras */}
         <div id='carrinho'>
           <Link to='/carrinho'><img src={bagIcon} alt='imagem do carrinho' className='cursor-pointer'/></Link>
-          {cartValue.length}
+          {cartValue ? cartValue.length : 0}
         </div>
       </nav>
       

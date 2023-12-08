@@ -1,4 +1,4 @@
-import {createContext, useState, useContext} from 'react'
+import {createContext, useState, useContext, useEffect} from 'react'
 import { ThemeChildren, PropsCart } from './interfaceContext'
 
 
@@ -7,6 +7,12 @@ export const Context = createContext<PropsCart | undefined>(undefined)
 
 // Componente Provider
 export default function ContextCart({children}:ThemeChildren){
+
+    useEffect(() => {
+        if(localStorage.getItem('@cartProduct') === null){
+            localStorage.setItem('@cartProduct',JSON.stringify([]))
+        }
+    },[])
 
     // Criando a state e armazenando o valor da localStorage na state.
     const [cartValue, setCartValue] = useState<object[]>(JSON.parse(localStorage.getItem('@cartProduct') as string))
