@@ -1,35 +1,32 @@
-import {createContext,useEffect} from 'react'
+import {createContext, useState, useContext} from 'react'
+import { ThemeChildren, PropsCart } from './interfaceContext'
 
-interface ThemeChildren {
-    children:React.ReactNode
-}
-
-interface PropsCart{
-    cartValue:object[],
-}
-
-const cart:PropsCart = {
-    cartValue:JSON.parse(localStorage.getItem('@cartProduct') as string) ? JSON.parse(localStorage.getItem('@cartProduct') as string) : [],
-}
 
 // Criando Contexto
-export const Context = createContext<PropsCart>(cart)
+export const Context = createContext<PropsCart | undefined>(undefined)
 
-
-
-// Componente do contexto
+// Componente Provider
 export default function ContextCart({children}:ThemeChildren){
 
-    useEffect(() => {
-        if(localStorage.getItem('@cartProduct') === null){
-            localStorage.setItem('@cartProduct',JSON.stringify([]))
-        }
-    },[])
+    // Criando a state e armazenando o valor da localStorage na state.
+    const [cartValue, setCartValue] = useState<object[]>(JSON.parse(localStorage.getItem('@cartProduct') as string))
 
-    // retornando o context Provider
     return(
-        <Context.Provider value={cart}>
+        <Context.Provider value={{cartValue,setCartValue}}>
             {children}
         </Context.Provider>
     )
+}
+
+// Funca para retornar o contexto o Xontexto
+export function UseCart():PropsCart{
+
+    // Pegando o Contexto
+    const cartContext = useContext(Context)
+
+    if(!cartContext){
+        throw 'error'
+    }
+
+    return cartContext
 }
