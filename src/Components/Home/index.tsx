@@ -1,17 +1,8 @@
 import '../../index.css'
 import {useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
+import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps } from './interfacesHome'
 
-// Interface da state lista
-interface Users {
-    category:string,
-    description:string,
-    id:string,
-    image_url:string,
-    name:string,
-    price_in_cents:number,
-    sales:number
-}
 
 // Componente Home - Principal
 export default function Home(){
@@ -89,18 +80,6 @@ export default function Home(){
    }
 }
 
-
-// Criando tipagem para as propriedades do button
-interface ButtonProps{
-    name:string,
-    lista:Users[],
-    setLista:React.Dispatch<React.SetStateAction<Users[]>>
-}
-
-interface ApiProps{
-    category:string
-}
-
 // Componente Button
 function Button(props:ButtonProps){
 
@@ -160,16 +139,7 @@ function Button(props:ButtonProps){
 
     return <button  className='first:border-2 border-b-amber-500' onClick={requestApi}>{name}</button>
 }
-
-// --------------------------------------
-
-
-// interface do Produto
-interface ProdutoProps{
-    img:string,
-    name:string,
-    price:number
-}
+// -------------------------------------
 
 // Componente Produto
 function Produto({img,name,price}:ProdutoProps){
@@ -204,18 +174,10 @@ function Produto({img,name,price}:ProdutoProps){
         </div>
     )
 }
-
 // --------------------------------------
 
 
 // Componente NavegationProgress
-interface NavegationProps{
-    prev:number,
-    next:number,
-    setPrev:React.Dispatch<React.SetStateAction<number>>;
-    setNext:React.Dispatch<React.SetStateAction<number>>;
-}
-
 function NavegationProgress({prev, next, setPrev, setNext}:NavegationProps){
 
     // State - contador
@@ -340,5 +302,4 @@ function NavegationProgress({prev, next, setPrev, setNext}:NavegationProps){
         </div>
     )
 }
-
 // --------------------------------------
