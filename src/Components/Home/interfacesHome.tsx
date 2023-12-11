@@ -20,6 +20,12 @@ export interface ApiProps{
     category:string
 }
 
+// Interface filterProduct
+export interface FilterProduct{
+    lista:Users[]
+    setLista:React.Dispatch<React.SetStateAction<Users[]>>
+}
+
 // interface do Produto
 export interface ProdutoProps{
     img:string,

@@ -1,7 +1,7 @@
 import '../../index.css'
 import {useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
-import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps } from './interfacesHome'
+import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps, FilterProduct } from './interfacesHome'
 
 
 // Componente Home - Principal
@@ -55,13 +55,7 @@ export default function Home(){
                     </div>
 
                     {/* Filtro dos produtos */}
-                    <select name="filtro" id="filtro-de-selecao" className='w-40 mt-4 md:mt-0'>
-                        <option value="default">Organizar por</option>
-                        <option value="Menor preco">Preço: maior-menor</option>
-                        <option value="maior preco">Preço: menor-maior</option>
-                        <option value="maior preco">Mais vendidos</option>
-                    </select>
-
+                    <FilterProducts lista={lista} setLista={setLista}/>
 
                 </nav>
 
@@ -103,7 +97,7 @@ function Button(props:ButtonProps){
 
         // chamando a funcao
         loadlistaDefault()
-    })
+    },[])
 
     // Desestruturando props
     const {name, lista, setLista} = props
@@ -121,10 +115,23 @@ function Button(props:ButtonProps){
 
 
         if(name === 'Camisetas'){
+            // Capturando tag select
+            const select = document.getElementById('filtro-de-selecao') as HTMLSelectElement
+
+            // Alterando o valor para default
+            select.value = 'default'
+
+            // Setando nova lista
             setLista(blusas)
         }
 
-        if(name === 'Canecas'){         
+        if(name === 'Canecas'){
+            // Capturando o filtro
+            const select = document.getElementById('filtro-de-selecao') as HTMLSelectElement
+
+            // Alterando o valor para default
+            select.value = 'default'      
+
             // Setando nova lista
             setLista(canecas)
 
@@ -140,6 +147,67 @@ function Button(props:ButtonProps){
     return <button  className='first:border-2 border-b-amber-500' onClick={requestApi}>{name}</button>
 }
 // -------------------------------------
+
+// Componente FilterProducts
+function FilterProducts({lista,setLista}:FilterProduct){
+
+    // state - listaDefault
+    const [listaDefault, setListaDefault] = useState(lista)
+
+    // função para carregar a state de listaDefault
+    async function loadListaDefault() {
+        try {
+            // Recebendo resposta
+            const response = await fetch('https://api-rockeatseat.vercel.app')
+
+            // Transformando a resposta em dados consumiveis
+            const data = await response.json()
+
+            // Armazenando o resultado na state lista
+            setListaDefault(data)
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    // Filter
+    function filter(option:string){
+        // Chamando a função para carregar a state de listadefault
+        loadListaDefault()
+
+        // Opções de filtragens
+        if(option === 'maior'){
+            const newLista = listaDefault.sort((a,b) => b.price_in_cents - a.price_in_cents)
+            setLista(newLista)
+        } 
+        
+        if(option === 'menor'){
+            const newLista = listaDefault.sort((a,b) => a.price_in_cents - b.price_in_cents)
+            setLista(newLista)
+        }
+        
+        if(option === 'maisVendidos'){
+            const newLista = listaDefault.sort((a,b) => a.sales - b.sales)
+            setLista(newLista)
+        }
+
+        if(option === 'default'){
+            setLista(listaDefault)
+        }
+
+    }
+
+    return(
+        <select name="filtro" id="filtro-de-selecao" className='w-40 mt-4 md:mt-0' onChange={(e) => filter(e.target.value)}>
+            <option value="default">Organizar por</option>
+            <option value="maior">Preço: maior-menor</option>
+            <option value="menor">Preço: menor-maior</option>
+            <option value="maisVendidos">Mais vendidos</option>
+        </select>
+    )
+}
+
 
 // Componente Produto
 function Produto({img,name,price}:ProdutoProps){
