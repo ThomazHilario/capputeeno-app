@@ -47,7 +47,7 @@ export default function Produto(){
         const cart:Users[] = JSON.parse(localStorageCart as string)
 
         // Jogandoo para dentro do cart o meu produto
-        cart.push(produto as Users)
+        cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80)} as Users)
 
         setCartValue(cart)
 
