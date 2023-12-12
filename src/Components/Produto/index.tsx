@@ -1,7 +1,8 @@
-import './mediaQueries.css'
+
 import {useState, useEffect} from 'react'
 import  {Link} from 'react-router-dom'
 import { UseCart } from '../../Context/context'
+import { SlActionUndo } from "react-icons/sl"
 
 
 interface Users {
@@ -59,15 +60,16 @@ export default function Produto(){
         <section id='container_produto_details'>
 
             {/* Link de navegacao */}
-            <nav className='mt-6 mb-7'>
+            <nav className='mt-6 mb-7 flex items-center gap-2'>
+                <SlActionUndo/>
                 <Link to='/'>Voltar</Link>
             </nav>
 
-            <div className='flex gap-10 mb-14' id='produto_details'>
+            <div className='flex flex-col gap-10 mb-14 lg:flex-row p-2' id='produto_details'>
                 
                 {/* imagem do produto */}
                 <div id='imagem_do_produto'>
-                    <img src={produto?.image_url} alt="imagem do produto" />
+                    <img src={produto?.image_url} alt="imagem do produto" className='h-48 m-auto md:h-72 lg:h-full'/>
                 </div>
 
                 <div id='informacoes' className='flex flex-col justify-between'>
@@ -83,15 +85,15 @@ export default function Produto(){
                         <h1 className='text-2xl'><strong>R$ {Math.ceil((produto?.price_in_cents as number) / 80).toFixed(2).replace('.',',')}</strong></h1>
                             
                         {/* Frete */}
-                        <p className='text-xs mt-10'>Frete de R$ 40,00 para todo o Brasil. Gratis para compras acima de R$ 90,00</p>
+                        <p className='text-xs mt-10 text-justify'>Frete de R$ 40,00 para todo o Brasil. Gratis para compras acima de R$ 90,00</p>
 
                         {/* informacoes do produto */}
-                        <h2 className='mt-20 text-xl'>Descricao</h2>
-                        <p className='text-sm w-96 text-justify'>Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto. </p>
+                        <h2 className='mt-20 text-xl mb-2 md:text-3xl'>Descricao</h2>
+                        <p className='text-sm w-6/6 text-justify md:w-96'>Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto. </p>
                         
                     </div>
                     
-                    <button  id='buttonAddCar' className='bg-blue-900 h-12 rounded-sm text-white font-bold' onClick={addCart}>Adicionar ao carrinho</button>
+                    <button  id='buttonAddCar' className='bg-blue-900 h-12 rounded-sm text-white font-bold mt-5' onClick={addCart}>Adicionar ao carrinho</button>
                 </div>
             </div>
         </section>
