@@ -7,10 +7,13 @@ export default function Carrinho(){
 
     // Carregando a state antes de renderizar o componente
     useEffect(() => {
-        if(localStorage.getItem('@cartProduct')){
+        if(JSON.parse(localStorage.getItem('@cartProduct') as string).length > 0){
             const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:Users) => Math.ceil(i.price_in_cents))
+
+            // Setando o valor do produto na state
             setCartValue(value.reduce((i:number,a:number) => a += i))
 
+            // Setando o array de produtos na state cartValue
             setCartProduct(JSON.parse(localStorage.getItem('@cartProduct') as string))
         }
     },[])
@@ -33,10 +36,10 @@ export default function Carrinho(){
                 <h2 className='text-3xl'>Seu Carrinho</h2>
 
                 {/* Quantidade de Produtos */}
-                <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartValue.toFixed(2)}</strong></p>
+                <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartValue && cartValue.toFixed(2)}</strong></p>
 
                 <div id='produtos'>
-                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}/>)}
+                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents} cartProduct={cartProduct}/>)}
                 </div>
             </div>
 
@@ -47,10 +50,14 @@ export default function Carrinho(){
 interface ProductType{
     name:string,
     img:string,
-    price:number
+    price:number,
+    cartProduct:Users[]
 }
 
-function Product({img, name, price}:ProductType){
+function Product({img, name, price, cartProduct}:ProductType){
+
+    const totalValue = cartProduct.filter((item) => item.name === name)
+
     return (
         <article className='flex items-center mt-4 mb-4 bg-white rounded-md'>
             <div>
@@ -66,7 +73,7 @@ function Product({img, name, price}:ProductType){
                 <p className='hidden'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio similique sed illo illum quis eaque et cumque saepe iste fuga, nemo minus atque quisquam? Et iusto laudantium voluptates dicta repellat?</p>
 
                 <div id='detalhes' className='flex justify-between'>
-                    <input type="number" className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' value={1}/>
+                    <input type="number" className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={totalValue.length}/>
                     <strong>R$ {price}</strong>
                 </div>
             </div>

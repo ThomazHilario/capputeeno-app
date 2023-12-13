@@ -12,7 +12,8 @@ interface Users {
     image_url:string,
     name:string,
     price_in_cents:number,
-    sales:number
+    sales:number,
+    amount:number,
 }
 
 
@@ -35,6 +36,7 @@ export default function Produto(){
     // state do produto
     const [produto, setProduto] = useState<Users>()
 
+    // state - global cartValue
     const {setCartValue} = UseCart()
 
     // Adicionando produto ao carrinho
@@ -44,15 +46,38 @@ export default function Produto(){
         const localStorageCart:unknown = localStorage.getItem('@cartProduct')
 
         // Transformando os dados da localStorage de string para dados javascript.
-        const cart:Users[] = JSON.parse(localStorageCart as string)
+        const cart:Users[] = JSON.parse(localStorageCart as string)        
 
-        // Jogandoo para dentro do cart o meu produto
-        cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80)} as Users)
+        // Jogando para dentro do cart o meu produto
+        if(cart.some(item => item.name === produto?.name) === false){
 
-        setCartValue(cart)
+            // Jogando para dentro do cart o meu produto
+            cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80),amount:1} as Users)
 
-        // Salvando as alterações na localStorage
-        localStorage.setItem('@cartProduct',JSON.stringify(cart))
+            // setando valor no cartValue
+            setCartValue(cart)
+
+            // Salvando as alterações na localStorage
+            localStorage.setItem('@cartProduct',JSON.stringify(cart))
+
+        } else if(cart.some(item => item.name)){
+
+            // Filtrando o array
+            const newCart = cart.filter((item) => item.name === produto?.name)
+
+            // Somando mais um produto
+            newCart[0].amount += 1
+
+            // Adicionando o novo preco
+            newCart[0].price_in_cents += Math.ceil(produto?.price_in_cents as number / 80)
+
+
+            // setando valor no cartValue
+            setCartValue(cart)
+
+            // Salvando as alterações na localStorage
+            localStorage.setItem('@cartProduct',JSON.stringify(cart))
+        }
     
     }
 
