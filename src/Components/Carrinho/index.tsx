@@ -39,7 +39,7 @@ export default function Carrinho(){
                 <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartValue && cartValue.toFixed(2)}</strong></p>
 
                 <div id='produtos'>
-                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents} cartProduct={cartProduct}/>)}
+                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartValue={setCartValue} index={idx}/>)}
                 </div>
             </div>
 
@@ -51,29 +51,59 @@ interface ProductType{
     name:string,
     img:string,
     price:number,
-    cartProduct:Users[]
+    amount:number,
+    index:number,
+    setCartValue:React.Dispatch<React.SetStateAction<number>>,
+    cartProduct:Users[],
+    setCartProduct:React.Dispatch<React.SetStateAction<Users[]>>
 }
 
-function Product({img, name, price, cartProduct}:ProductType){
+function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartValue}:ProductType){
 
-    const totalValue = cartProduct.filter((item) => item.name === name)
+    function removeItem(){
+        // Tirando o produto especific
+        cartProduct.splice(index,1)
+
+        // Setando na state setCarProduct o que soobrou do cartProduct
+        setCartProduct([...cartProduct])
+
+        // Salvando o novo cartProduct
+        localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
+
+        // Pegando da localStorage o novo array de produtos salvo
+        const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:Users) => Math.ceil(i.price_in_cents))
+
+        if(value.length > 0){
+            // Setando o valor do produto na state
+            setCartValue(value.reduce((i:number,a:number) => a += i))
+        } else if(value.length === 0){
+            setCartValue(0)
+        }
+         
+
+    }
 
     return (
         <article className='flex items-center mt-4 mb-4 bg-white rounded-md'>
+            {/* div contendo a imaggem */}
             <div>
                 <img src={img} alt='foto do produto' className='h-28 rounded-md'/>
             </div>
 
+            {/* div contendo detalhes do produto */}
             <div className='flex flex-col h-24 justify-between pl-3 pr-3 w-full'>
+                {/* titulo e icon */}
                 <div id='titulo' className='flex items-center justify-between'>
                     <h2>{name}</h2>
-                    <MdOutlineDeleteForever size={22}/>
+                    <MdOutlineDeleteForever size={22} onClick={removeItem}/>
                 </div>
 
+                {/* descricao do produto */}
                 <p className='hidden'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio similique sed illo illum quis eaque et cumque saepe iste fuga, nemo minus atque quisquam? Et iusto laudantium voluptates dicta repellat?</p>
 
+                {/* Valores e quantidade */}
                 <div id='detalhes' className='flex justify-between'>
-                    <input type="number" className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={totalValue.length}/>
+                    <input type="number" className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={amount}/>
                     <strong>R$ {price}</strong>
                 </div>
             </div>

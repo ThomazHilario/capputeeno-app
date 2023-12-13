@@ -6,7 +6,8 @@ export interface Users {
     image_url:string,
     name:string,
     price_in_cents:number,
-    sales:number
+    sales:number,
+    amount:number
 }
 
 // Criando tipagem para as propriedades do button
