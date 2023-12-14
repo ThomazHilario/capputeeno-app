@@ -39,6 +39,7 @@ export default function Carrinho(){
                 <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartValue && cartValue.toFixed(2)}</strong></p>
 
                 <div id='produtos'>
+                    {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
                     {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartValue={setCartValue} index={idx}/>)}
                 </div>
             </div>
