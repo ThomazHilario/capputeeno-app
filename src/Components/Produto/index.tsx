@@ -12,6 +12,7 @@ interface Users {
     image_url:string,
     name:string,
     price_in_cents:number,
+    priceAtually:number,
     sales:number,
     amount:number,
 }
@@ -52,7 +53,7 @@ export default function Produto(){
         if(cart.some(item => item.name === produto?.name) === false){
 
             // Jogando para dentro do cart o meu produto
-            cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80),amount:1} as Users)
+            cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80),priceAtually:Math.ceil(produto?.price_in_cents as number / 80), amount:1} as Users)
 
             // setando valor no cartValue
             setCartValue(cart)

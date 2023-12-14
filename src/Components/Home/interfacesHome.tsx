@@ -6,6 +6,7 @@ export interface Users {
     image_url:string,
     name:string,
     price_in_cents:number,
+    priceAtually:number,
     sales:number,
     amount:number
 }

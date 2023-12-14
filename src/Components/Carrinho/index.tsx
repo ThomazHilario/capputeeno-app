@@ -39,7 +39,7 @@ export default function Carrinho(){
                 <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartValue && cartValue.toFixed(2)}</strong></p>
 
                 <div id='produtos'>
-                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartValue={setCartValue} index={idx}/>)}
+                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartValue={setCartValue} index={idx}/>)}
                 </div>
             </div>
 
@@ -51,6 +51,7 @@ interface ProductType{
     name:string,
     img:string,
     price:number,
+    priceAtually:number,
     amount:number,
     index:number,
     setCartValue:React.Dispatch<React.SetStateAction<number>>,
@@ -58,8 +59,12 @@ interface ProductType{
     setCartProduct:React.Dispatch<React.SetStateAction<Users[]>>
 }
 
-function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartValue}:ProductType){
+function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartValue, priceAtually}:ProductType){
 
+    // state de referencia de quantidades
+    const [amountRef, setAmountRef] = useState<number>(0)
+
+    // Removendo item da lista
     function removeItem(){
         // Tirando o produto especific
         cartProduct.splice(index,1)
@@ -83,6 +88,54 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
 
     }
 
+    // Atualizando a quantidade de produtos
+    function updateValue(value:string){
+
+        // Salvando o numero do input a uma variavel
+        const amount = parseFloat(value)
+
+        // Setando na state amountRef  valor do input
+        setAmountRef(amount)
+
+        if(amount > amountRef){
+            // Alterando a quantidade do produto
+            cartProduct[index].amount = amount
+
+            // Alterando o preco com base a quantidade
+            cartProduct[index].price_in_cents = cartProduct[index].price_in_cents += priceAtually
+
+            // Setando na state cartProduct a mudanca feita
+            setCartProduct([...cartProduct])
+
+            // Pegando todos os valores do produtos
+            const value:number[] = cartProduct.map((i:Users) => Math.ceil(i.price_in_cents))
+
+            // Setando na state o valor total dos produtos
+            setCartValue(value.reduce((i,a) => a += i))
+
+            // Salvando na localStorage
+            localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
+
+        }else if(amountRef > amount){
+            // Alterando a quantidade do produto
+            cartProduct[index].amount = amount
+
+            // Alterando o preco com base a quantidade
+            cartProduct[index].price_in_cents = cartProduct[index].price_in_cents -= priceAtually
+
+            // Setando na state cartProduct a mudanca feita
+            setCartProduct([...cartProduct])
+
+            // Pegando todos os valores do produtos
+            const value:number[] = cartProduct.map((i:Users) => Math.ceil(i.price_in_cents))
+
+            // Setando na state o valor total dos produtos
+            setCartValue(value.reduce((i,a) => a += i))
+
+            // Salvando na localStorage
+            localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
+        }
+    }
     return (
         <article className='flex items-center mt-4 mb-4 bg-white rounded-md'>
             {/* div contendo a imaggem */}
@@ -103,7 +156,7 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
 
                 {/* Valores e quantidade */}
                 <div id='detalhes' className='flex justify-between'>
-                    <input type="number" className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={amount}/>
+                    <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
                     <strong>R$ {price}</strong>
                 </div>
             </div>
