@@ -37,7 +37,7 @@ export default function Carrinho(){
             </nav>
 
             {/* div  carrinho */}
-            <div id='carrinho_de_compras' className='h-screen mt-3'>
+            <div id='carrinho_de_compras' className='mt-3 h-screen lg:flex justify-between'>
                 {/* Listagem de produtos */}
                 <div id='lista_de_Produtos'>
 
@@ -52,6 +52,8 @@ export default function Carrinho(){
                         {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
                     </div>
                 </div>
+
+                {cartProduct.length > 0 && <PartOfThePurchase cartTotalValue={cartTotalValue}/>}
 
                 {/* finalizar compra */}
             </div>
@@ -76,11 +78,11 @@ interface ProductType{
 
 // Componente produto
 function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartTotalValue, priceAtually, setCartValue}:ProductType){
-    // Usando o use effect para setar a referencia a state amouthRef
+    // Usando o use effect para setar a referencia a state amountRef
     useEffect(() => {
         setAmountRef(amount)
     },[amount])
-    
+
     // state de referencia de quantidades
     const [amountRef, setAmountRef] = useState<number>(0)
 
@@ -167,14 +169,14 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
     }
 
     return (
-        <article className='flex items-center mt-4 mb-4 bg-white rounded-md'>
+        <article className='flex items-center mt-4 mb-4 bg-white rounded-md lg:w-10/12 '>
             {/* div contendo a imaggem */}
             <div>
-                <img src={img} alt='foto do produto' className='h-28 rounded-md'/>
+                <img src={img} alt='foto do produto' className='h-28 rounded-md lg:h-48'/>
             </div>
 
             {/* div contendo detalhes do produto */}
-            <div className='flex flex-col h-24 justify-between pl-3 pr-3 w-full'>
+            <div className='flex flex-col h-24 justify-between pl-3 pr-3 w-11/12 lg:justify-evenly'>
                 {/* titulo e icon */}
                 <div id='titulo' className='flex items-center justify-between'>
                     <h2>{name}</h2>
@@ -182,15 +184,50 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
                 </div>
 
                 {/* descricao do produto */}
-                <p className='hidden'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio similique sed illo illum quis eaque et cumque saepe iste fuga, nemo minus atque quisquam? Et iusto laudantium voluptates dicta repellat?</p>
+                <p className='hidden  text-sm lg:block mt-2 mb-4 w-11/12'>Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto.</p>
 
                 {/* Valores e quantidade */}
                 <div id='detalhes' className='flex justify-between'>
                     <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
-                    <strong>R$ {price}</strong>
+                    <strong>R$ {price.toFixed(2)}</strong>
                 </div>
             </div>
         </article>
     )
 }
 
+
+interface PartOfThePurchaseType{
+    cartTotalValue:number
+}
+
+// Componente PartOfThePurchase
+function PartOfThePurchase({cartTotalValue}:PartOfThePurchaseType){
+    return(
+        <aside className='flex flex-col justify-between bg-white w-12/12 lg:w-5/12 h-64'>
+            {/* Resumo dos pedidos */}
+            <div>
+                {/* titulo */}
+                <h2 className='mt-2 mb-4 pl-5 font-bold text-xl'>Resumo do Pedido</h2>
+
+                {/* valor dos produtos */}
+                <p className='pl-5 flex justify-between pr-8'>Subtotal dos produtos <span>R$ {cartTotalValue.toFixed(2)}</span></p>
+
+                {/* Valor da entrega */}
+                <p className='mt-3 pl-5 flex justify-between pr-8'>Entrega <span>R$ 40,00</span></p>
+
+                {/* separando linhas */}
+                <hr className='mt-4 lg:ml-6 mr-6'/>
+
+                {/* Total */}
+                <p className='lg:mt-3 font-bold flex justify-between pr-8 pl-5'>Total <span>R$ {(cartTotalValue + 40).toFixed(2)}</span></p>
+
+                {/* Button */}
+                <button className='bg-green-500 block m-auto mt-4 mb-3 w-72 h-12 rounded-sm text-white'>FINALIZAR A COMPRA</button>
+            </div>
+
+            {/* Licencas */}
+            <div></div>
+        </aside>
+    )
+}
