@@ -42,7 +42,7 @@ export default function Carrinho(){
                 <div id='lista_de_Produtos'>
 
                     {/* titulo da pagina */}
-                <h2 className='text-3xl'>Seu Carrinho</h2>
+                    <h2 className='text-3xl'>Seu Carrinho</h2>
 
                     {/* Quantidade de Produtos */}
                     <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartTotalValue && cartTotalValue.toFixed(2)}</strong></p>
@@ -52,12 +52,15 @@ export default function Carrinho(){
                         {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
                     </div>
                 </div>
+
+                {/* finalizar compra */}
             </div>
 
         </section>
     )
 }
 
+// Tipagem do componente produto
 interface ProductType{
     name:string,
     img:string,
@@ -71,8 +74,13 @@ interface ProductType{
     setCartValue:React.Dispatch<React.SetStateAction<object[]>>
 }
 
+// Componente produto
 function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartTotalValue, priceAtually, setCartValue}:ProductType){
-
+    // Usando o use effect para setar a referencia a state amouthRef
+    useEffect(() => {
+        setAmountRef(amount)
+    },[amount])
+    
     // state de referencia de quantidades
     const [amountRef, setAmountRef] = useState<number>(0)
 
@@ -157,6 +165,7 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
             localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
         }
     }
+
     return (
         <article className='flex items-center mt-4 mb-4 bg-white rounded-md'>
             {/* div contendo a imaggem */}
@@ -184,3 +193,4 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
         </article>
     )
 }
+
