@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Users } from '../Home/interfacesHome'
 import { MdOutlineDeleteForever } from "react-icons/md"
+import { UseCart } from '../../Context/context'
 
 export default function Carrinho(){
 
     // Carregando a state antes de renderizar o componente
     useEffect(() => {
+        // Verificando se tem ao menos um produto na localStorage
         if(JSON.parse(localStorage.getItem('@cartProduct') as string).length > 0){
             const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:Users) => Math.ceil(i.price_in_cents))
 
             // Setando o valor do produto na state
-            setCartValue(value.reduce((i:number,a:number) => a += i))
+            setCartTotalValue(value.reduce((i:number,a:number) => a += i))
 
             // Setando o array de produtos na state cartValue
             setCartProduct(JSON.parse(localStorage.getItem('@cartProduct') as string))
@@ -21,26 +23,34 @@ export default function Carrinho(){
     // state - Lista de produtos
     const [cartProduct,setCartProduct] = useState<Users[]>([])
 
-    // state - valor
-    const [cartValue,setCartValue] = useState<number>(0)
+    // state - valor total
+    const [cartTotalValue,setCartTotalValue] = useState<number>(0)
+
+    // state - quantidade de produtos
+    const {setCartValue} = UseCart()
 
     return(
         <section className='w-11/12'>
+            {/* Link de voltar a pagina home */}
             <nav className='mt-5'>
                 <Link to='/'>Voltar</Link>
             </nav>
 
+            {/* div  carrinho */}
+            <div id='carrinho_de_compras' className='h-screen mt-3'>
+                {/* Listagem de produtos */}
+                <div id='lista_de_Produtos'>
 
-            <div id='carrinho' className='h-screen mt-3'>
-                {/* titulo da pagina */}
+                    {/* titulo da pagina */}
                 <h2 className='text-3xl'>Seu Carrinho</h2>
 
-                {/* Quantidade de Produtos */}
-                <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartValue && cartValue.toFixed(2)}</strong></p>
+                    {/* Quantidade de Produtos */}
+                    <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartTotalValue && cartTotalValue.toFixed(2)}</strong></p>
 
-                <div id='produtos'>
-                    {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
-                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartValue={setCartValue} index={idx}/>)}
+                    <div id='produtos'>
+                        {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
+                        {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
+                    </div>
                 </div>
             </div>
 
@@ -55,12 +65,13 @@ interface ProductType{
     priceAtually:number,
     amount:number,
     index:number,
-    setCartValue:React.Dispatch<React.SetStateAction<number>>,
+    setCartTotalValue:React.Dispatch<React.SetStateAction<number>>,
     cartProduct:Users[],
-    setCartProduct:React.Dispatch<React.SetStateAction<Users[]>>
+    setCartProduct:React.Dispatch<React.SetStateAction<Users[]>>,
+    setCartValue:React.Dispatch<React.SetStateAction<object[]>>
 }
 
-function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartValue, priceAtually}:ProductType){
+function Product({img, name, price, amount, index, cartProduct, setCartProduct, setCartTotalValue, priceAtually, setCartValue}:ProductType){
 
     // state de referencia de quantidades
     const [amountRef, setAmountRef] = useState<number>(0)
@@ -76,14 +87,17 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
         // Salvando o novo cartProduct
         localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
 
+        // Salvando a contaggem nova dos produtos
+        setCartValue(JSON.parse(localStorage.getItem('@cartProduct') as string))
+
         // Pegando da localStorage o novo array de produtos salvo
         const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:Users) => Math.ceil(i.price_in_cents))
 
         if(value.length > 0){
             // Setando o valor do produto na state
-            setCartValue(value.reduce((i:number,a:number) => a += i))
+            setCartTotalValue(value.reduce((i:number,a:number) => a += i))
         } else if(value.length === 0){
-            setCartValue(0)
+            setCartTotalValue(0)
         }
          
 
@@ -95,15 +109,18 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
         // Salvando o numero do input a uma variavel
         const amount = parseFloat(value)
 
-        // Setando na state amountRef  valor do input
+        // Setando na state amountRef valor do input
         setAmountRef(amount)
 
         if(amount > amountRef){
+            // Pegando elemento do array em especifico
+            const cartProductRef = cartProduct[index]
+
             // Alterando a quantidade do produto
-            cartProduct[index].amount = amount
+            cartProductRef.amount = amount
 
             // Alterando o preco com base a quantidade
-            cartProduct[index].price_in_cents = cartProduct[index].price_in_cents += priceAtually
+            cartProductRef.price_in_cents = cartProductRef.price_in_cents += priceAtually
 
             // Setando na state cartProduct a mudanca feita
             setCartProduct([...cartProduct])
@@ -112,17 +129,20 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
             const value:number[] = cartProduct.map((i:Users) => Math.ceil(i.price_in_cents))
 
             // Setando na state o valor total dos produtos
-            setCartValue(value.reduce((i,a) => a += i))
+            setCartTotalValue(value.reduce((i,a) => a += i))
 
             // Salvando na localStorage
             localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
 
         }else if(amountRef > amount){
+            // Pegando elemento do array em especifico
+            const cartProductRef = cartProduct[index]
+
             // Alterando a quantidade do produto
-            cartProduct[index].amount = amount
+            cartProductRef.amount = amount
 
             // Alterando o preco com base a quantidade
-            cartProduct[index].price_in_cents = cartProduct[index].price_in_cents -= priceAtually
+            cartProductRef.price_in_cents = cartProductRef.price_in_cents -= priceAtually
 
             // Setando na state cartProduct a mudanca feita
             setCartProduct([...cartProduct])
@@ -131,7 +151,7 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
             const value:number[] = cartProduct.map((i:Users) => Math.ceil(i.price_in_cents))
 
             // Setando na state o valor total dos produtos
-            setCartValue(value.reduce((i,a) => a += i))
+            setCartTotalValue(value.reduce((i,a) => a += i))
 
             // Salvando na localStorage
             localStorage.setItem('@cartProduct',JSON.stringify(cartProduct))
