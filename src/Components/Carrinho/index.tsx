@@ -29,37 +29,45 @@ export default function Carrinho(){
     // state - quantidade de produtos
     const {setCartValue} = UseCart()
 
-    return(
-        <section className='w-11/12'>
-            {/* Link de voltar a pagina home */}
-            <nav className='mt-5'>
-                <Link to='/'>Voltar</Link>
-            </nav>
-
-            {/* div  carrinho */}
-            <div id='carrinho_de_compras' className='mt-3 h-screen lg:flex justify-between'>
-                {/* Listagem de produtos */}
-                <div id='lista_de_Produtos'>
-
-                    {/* titulo da pagina */}
-                    <h2 className='text-3xl'>Seu Carrinho</h2>
-
-                    {/* Quantidade de Produtos */}
-                    <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartTotalValue && cartTotalValue.toFixed(2)}</strong></p>
-
-                    <div id='produtos'>
-                        {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
-                        {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
+    if(cartProduct.length === 0 ){
+        return(
+            <section className='h-[89vh] flex justify-center items-center'>
+                <h2 className='text-4xl'>Seu carrinho esta vazio</h2>
+            </section>
+        )
+    } else{
+        return(
+            <section className='w-11/12 h-screen'>
+                {/* Link de voltar a pagina home */}
+                <nav className='mt-5'>
+                    <Link to='/'>Voltar</Link>
+                </nav>
+    
+                {/* div  carrinho */}
+                <div id='carrinho_de_compras' className='mt-3 lg:flex justify-between'>
+                    {/* Listagem de produtos */}
+                    <div id='lista_de_Produtos'>
+    
+                        {/* titulo da pagina */}
+                        <h2 className='text-3xl'>Seu Carrinho</h2>
+    
+                        {/* Quantidade de Produtos */}
+                        <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartTotalValue && cartTotalValue.toFixed(2)}</strong></p>
+    
+                        <div id='produtos'>
+                            {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
+                            {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
+                        </div>
                     </div>
+    
+                    {cartProduct.length > 0 && <PartOfThePurchase cartTotalValue={cartTotalValue}/>}
+    
+                    {/* finalizar compra */}
                 </div>
-
-                {cartProduct.length > 0 && <PartOfThePurchase cartTotalValue={cartTotalValue}/>}
-
-                {/* finalizar compra */}
-            </div>
-
-        </section>
-    )
+    
+            </section>
+        )
+    }
 }
 
 // Tipagem do componente produto
@@ -204,7 +212,7 @@ interface PartOfThePurchaseType{
 // Componente PartOfThePurchase
 function PartOfThePurchase({cartTotalValue}:PartOfThePurchaseType){
     return(
-        <aside className='flex flex-col justify-between bg-white w-12/12 lg:w-5/12 h-64'>
+        <aside className='flex flex-col justify-between bg-white w-12/12 lg:w-6/12 h-6/12'>
             {/* Resumo dos pedidos */}
             <div>
                 {/* titulo */}
@@ -223,11 +231,17 @@ function PartOfThePurchase({cartTotalValue}:PartOfThePurchaseType){
                 <p className='lg:mt-3 font-bold flex justify-between pr-8 pl-5'>Total <span>R$ {(cartTotalValue + 40).toFixed(2)}</span></p>
 
                 {/* Button */}
-                <button className='bg-green-500 block m-auto mt-4 mb-3 w-72 h-12 rounded-sm text-white'>FINALIZAR A COMPRA</button>
+                <button className='bg-green-500 block m-auto mt-4 mb-3 w-10/12 h-12 rounded-sm text-white'>FINALIZAR A COMPRA</button>
             </div>
 
             {/* Licencas */}
-            <div></div>
+            <div className='p-5'>
+                <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>AJUDA</a>
+                <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>REEMBOLSO</a>
+                <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>ENTREGAS E FRETE</a>
+                <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>TROCAS E DEVOLUÇÕES</a>
+            </div>
+
         </aside>
     )
 }
