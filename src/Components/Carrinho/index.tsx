@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Users } from '../Home/interfacesHome'
 import { MdOutlineDeleteForever } from "react-icons/md"
 import { UseCart } from '../../Context/context'
+import { SlActionUndo } from "react-icons/sl";
 
 export default function Carrinho(){
 
@@ -31,8 +32,9 @@ export default function Carrinho(){
 
     if(cartProduct.length === 0 ){
         return(
-            <section className='h-[89vh] flex justify-center items-center'>
+            <section className='h-[89vh] flex justify-center items-center flex-col gap-3'>
                 <h2 className='text-4xl'>Seu carrinho esta vazio</h2>
+                <Link to='/' className='flex items-center gap-2'><SlActionUndo/> Voltar</Link>
             </section>
         )
     } else{
@@ -40,7 +42,7 @@ export default function Carrinho(){
             <section className='w-11/12 h-screen'>
                 {/* Link de voltar a pagina home */}
                 <nav className='mt-5'>
-                    <Link to='/'>Voltar</Link>
+                    <Link to='/' className='flex items-center gap-2'><SlActionUndo/> Voltar</Link>
                 </nav>
     
                 {/* div  carrinho */}
