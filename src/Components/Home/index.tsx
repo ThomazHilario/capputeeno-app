@@ -1,5 +1,5 @@
 import '../../index.css'
-import {useState, useEffect } from 'react'
+import {useState, useEffect, useMemo } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps, FilterProduct } from './interfacesHome'
 
@@ -150,31 +150,20 @@ function Button(props:ButtonProps){
 
 // Componente FilterProducts
 function FilterProducts({lista,setLista}:FilterProduct){
+ 
+    // Salvando a lista no cache, evitando fazer outra requisição
+    const listaDefaultCache = useMemo(() => {
+        return lista
+    },[lista])
 
     // state - listaDefault
-    const [listaDefault, setListaDefault] = useState(lista)
+    const [listaDefault, setListaDefault] = useState(listaDefaultCache)
 
-    // função para carregar a state de listaDefault
-    async function loadListaDefault() {
-        try {
-            // Recebendo resposta
-            const response = await fetch('https://api-rockeatseat.vercel.app')
-
-            // Transformando a resposta em dados consumiveis
-            const data = await response.json()
-
-            // Armazenando o resultado na state lista
-            setListaDefault(data)
-
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
     // Filter
     function filter(option:string){
-        // Chamando a função para carregar a state de listadefault
-        loadListaDefault()
+
+        setListaDefault(listaDefaultCache)
 
         // Opções de filtragens
         if(option === 'maior'){
