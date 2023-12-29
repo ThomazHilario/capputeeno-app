@@ -157,13 +157,13 @@ function FilterProducts({lista,setLista}:FilterProduct){
     },[lista])
 
     // state - listaDefault
-    const [listaDefault, setListaDefault] = useState(listaDefaultCache)
+    const [listaDefault, setListaDefault] = useState([...listaDefaultCache])
 
 
     // Filter
     function filter(option:string){
-
-        setListaDefault(listaDefaultCache)
+        // Setando a lista do cache
+        setListaDefault([...listaDefaultCache])
 
         // Opções de filtragens
         if(option === 'maior'){
