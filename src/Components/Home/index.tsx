@@ -123,6 +123,10 @@ function Button(props:ButtonProps){
 
             // Setando nova lista
             setLista(blusas)
+
+            // Alterando o display do navegationProgress
+            const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
+            navegatinProgress.style.display = 'none'
         }
 
         if(name === 'Canecas'){
@@ -135,10 +139,18 @@ function Button(props:ButtonProps){
             // Setando nova lista
             setLista(canecas)
 
+            // Alterando o display do navegationProgress
+            const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
+            navegatinProgress.style.display = 'none'
+
         }
 
         if(name === 'Todos os produtos'){
             setLista(listadefault)  
+
+            // Alterando o display do navegationProgress
+            const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
+            navegatinProgress.style.display = 'flex'
         }               
 
         
