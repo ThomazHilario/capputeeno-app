@@ -17,15 +17,18 @@ export default function ContextCart({children}:ThemeChildren){
     // Criando a state e armazenando o valor da localStorage na state.
     const [cartValue, setCartValue] = useState<object[]>(JSON.parse(localStorage.getItem('@cartProduct') as string))
 
+    // seach - state
+    const [seach, setSeach] = useState<string>('')
+
     return(
-        <Context.Provider value={{cartValue,setCartValue}}>
+        <Context.Provider value={{cartValue,setCartValue, seach, setSeach}}>
             {children}
         </Context.Provider>
     )
 }
 
 // Funca para retornar o contexto o Xontexto
-export function UseCart():PropsCart{
+export function UseStatesProps():PropsCart{
 
     // Pegando o Contexto
     const cartContext = useContext(Context)

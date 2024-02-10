@@ -1,20 +1,33 @@
 import '../../index.css'
+
+// Import react
 import {useState, useEffect, useMemo } from 'react'
 import {useNavigate} from 'react-router-dom'
+
+// Import context
+import { UseStatesProps } from '../../Context/context'
+
+// Import Interface
 import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps, FilterProduct } from './interfacesHome'
 
 
 // Componente Home - Principal
 export default function Home(){
+
+    const {seach} = UseStatesProps()
+
     // variaveis para mudar a pagina
     const [prev, setPrev] = useState<number>(0)
     const [next, setNext] = useState<number>(12) 
 
     // State - lista
     const [lista, setLista] = useState<Users[]>([])
+
+    // Filtro de elementos
+    const listFilter = lista.filter(products => products.name.toLowerCase().includes(seach.toLowerCase()) && products)
     
     // state - carregado
-    const [carregado, setCarregado] = useState(false)
+    const [carregado, setCarregado] = useState(true)
 
     useEffect(() => {
         async function loadLista(){
@@ -26,7 +39,7 @@ export default function Home(){
                 setLista(data)
 
                 // Alterando a state carregado para true
-                setCarregado(true)
+                setCarregado(false)
             } catch (e) {
                 console.log(e)
             }
@@ -35,11 +48,12 @@ export default function Home(){
         loadLista()
     },[])
 
-   if(carregado === false){
-
-        return <div className='h-screen flex justify-center items-center'>
-            <h1>Carregando</h1>
-        </div>
+   if(carregado === true){
+    return (
+    <div className='h-screen flex justify-center items-center'>
+        <h1>Carregando</h1>
+    </div>
+    )
 
    } else{
         return(
@@ -65,7 +79,7 @@ export default function Home(){
                 <div id='container_produtos' className='mt-8 mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4' >
 
                     {/* Percorrendo cada produto */}
-                    {lista.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}
+                    {listFilter.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}
 
                 </div>
 
@@ -75,7 +89,7 @@ export default function Home(){
 }
 
 // Componente Button
-function Button(props:ButtonProps){
+function Button({name, lista, setLista}:ButtonProps){
 
     useEffect(() => {
         // Fazendo requisicao a api
@@ -98,9 +112,6 @@ function Button(props:ButtonProps){
         // chamando a funcao
         loadlistaDefault()
     },[])
-
-    // Desestruturando props
-    const {name, lista, setLista} = props
 
     // Lista - padrao
     const [listadefault, setListadefault] = useState(lista)

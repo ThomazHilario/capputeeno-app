@@ -1,6 +1,6 @@
 import { BrowserRouter, Link } from 'react-router-dom'
 import ContextCart from './Context/context'
-import { UseCart } from './Context/context'
+import { UseStatesProps} from './Context/context'
 import RoutesNavegation from './Routes/routes'
 import bagIcon from './assets/bag_icons/bag32.png'
 import './index.css'
@@ -29,31 +29,7 @@ function App() {
 function Header(){
 
   // Pegando a state global cartValue
-  const { cartValue } = UseCart()
-
-  // Função para pesquisar produto específico
-  function seachProduct(value:string){
-    const produto = document.querySelectorAll<HTMLElement>('.produto')
-
-    produto.forEach(produto => {
-      // Pegando o nome do produto
-      const nameProduto:string = produto.firstElementChild?.nextElementSibling?.firstElementChild?.textContent?.toLowerCase() as string
-      
-      // O valor digitado no input
-      const input = value
-      
-      // Caso tenha o nome do produto dentro do input
-      if(nameProduto.includes(input)){
-
-        // O display vira block
-        produto.style.display = 'block'
-      } else{
-
-        // O display vira none
-        produto.style.display = 'none'
-      }
-    })
-  }
+  const { cartValue, setSeach } = UseStatesProps()
 
   return(
     <header className='flex justify-center items-center md:justify-between pr-20 pl-20' id='cabecalho'>
@@ -65,7 +41,7 @@ function Header(){
       <nav className='hidden md:flex gap-5 '>
         {/* formulario */}
         <form>
-          <input type='text' placeholder='Procurando por algo em especifico?' onChange={(e) => seachProduct(e.target.value)} className='w-80 p-1 pl-4 bg-gray-100 rouded-sm'/>
+          <input type='text' placeholder='Procurando por algo em especifico?' onChange={(e) => setSeach(e.target.value)} className='w-80 p-1 pl-4 bg-gray-100 rouded-sm'/>
         </form>
 
         {/* icone carrinho de compras */}

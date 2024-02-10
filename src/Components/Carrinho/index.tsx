@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Users } from '../Home/interfacesHome'
 import { MdOutlineDeleteForever } from "react-icons/md"
-import { UseCart } from '../../Context/context'
+import { UseStatesProps } from '../../Context/context'
 import { SlActionUndo } from "react-icons/sl";
 
 export default function Carrinho(){
@@ -28,7 +28,7 @@ export default function Carrinho(){
     const [cartTotalValue,setCartTotalValue] = useState<number>(0)
 
     // state - quantidade de produtos
-    const {setCartValue} = UseCart()
+    const {setCartValue} = UseStatesProps()
 
     if(cartProduct.length === 0 ){
         return(

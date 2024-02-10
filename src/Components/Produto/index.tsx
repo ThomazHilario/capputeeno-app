@@ -1,7 +1,7 @@
 
 import {useState, useEffect} from 'react'
 import  {Link} from 'react-router-dom'
-import { UseCart } from '../../Context/context'
+import { UseStatesProps} from '../../Context/context'
 import { SlActionUndo } from "react-icons/sl"
 
 
@@ -38,7 +38,7 @@ export default function Produto(){
     const [produto, setProduto] = useState<Users>()
 
     // state - global cartValue
-    const {setCartValue} = UseCart()
+    const {setCartValue} = UseStatesProps()
 
     // Adicionando produto ao carrinho
     function addCart(){
