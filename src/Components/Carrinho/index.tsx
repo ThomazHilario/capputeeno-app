@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // import types
-import { Users } from '../Home/interfacesHome'
+import { Users } from '../Home/../../interfaces/homeTypes'
 
 // import Context
 import { UseStatesProps } from '../../Context/context'
