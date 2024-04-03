@@ -76,7 +76,7 @@ export default function Home(){
                 <NavegationProgress setPrev={setPrev} setNext={setNext} prev={prev} next={next}/>
 
                 {/* Container dos produtos listados */}
-                <div id='container_produtos' className='mt-8 mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4' >
+                <div id='container_produtos' className='h-auto mt-8 mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4' >
 
                     {/* Percorrendo cada produto */}
                     {listFilter.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}

@@ -12,7 +12,7 @@ export const Header = () => {
   const { cartValue, setSeach } = UseStatesProps()
 
   return(
-    <header className='flex justify-center items-center md:justify-between pr-20 pl-20' id='cabecalho'>
+    <header className='bg-white flex justify-center items-center md:justify-between pr-20 pl-20' id='cabecalho'>
 
       {/* titulo logo */}
       <Link to='/'><h1 className='titulo'>Capputeeno</h1></Link>
