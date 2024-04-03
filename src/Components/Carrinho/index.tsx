@@ -49,7 +49,7 @@ export default function Carrinho(){
         )
     } else{
         return(
-            <section className='w-11/12 h-screen'>
+            <section className='w-11/12 lg:h-[89vh]'>
                 {/* Link de voltar a pagina home */}
                 <nav className='mt-5'>
                     <Link to='/' className='flex items-center gap-2'><SlActionUndo/> Voltar</Link>
@@ -69,8 +69,8 @@ export default function Carrinho(){
                         <div id='produtos'>
                             {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
                             
-                            <ScrollArea.Root >
-                                <ScrollArea.Viewport style={{height:500}}>
+                            <ScrollArea.Root className='p-2'>
+                                <ScrollArea.Viewport style={{height:400}}>
                                     {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
                                 </ScrollArea.Viewport>
                                 <ScrollArea.Scrollbar orientation="horizontal">
@@ -202,7 +202,7 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
     }
 
     return (
-        <article className='flex items-center mt-4 mb-4 bg-white rounded-md lg:w-10/12 '>
+        <article className='flex items-center mt-4 mb-4 bg-white rounded-md lg:w-11/12 '>
             {/* div contendo a imaggem */}
             <div>
                 <img src={img} alt='foto do produto' className='h-28 rounded-md lg:h-48'/>
@@ -221,7 +221,7 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
 
                 {/* Valores e quantidade */}
                 <div id='detalhes' className='flex justify-between'>
-                    <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md  p-1' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
+                    <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md  p-1 ' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
                     <strong>R$ {price.toFixed(2)}</strong>
                 </div>
             </div>
