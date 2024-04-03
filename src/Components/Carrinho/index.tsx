@@ -1,9 +1,19 @@
+// import react
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+
+// import types
 import { Users } from '../Home/interfacesHome'
-import { MdOutlineDeleteForever } from "react-icons/md"
+
+// import Context
 import { UseStatesProps } from '../../Context/context'
+
+// import icons
+import { MdOutlineDeleteForever } from "react-icons/md"
 import { SlActionUndo } from "react-icons/sl";
+
+// import radix
+import * as ScrollArea from '@radix-ui/react-scroll-area'
 
 export default function Carrinho(){
 
@@ -58,7 +68,20 @@ export default function Carrinho(){
     
                         <div id='produtos'>
                             {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
-                            {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
+                            
+                            <ScrollArea.Root >
+                                <ScrollArea.Viewport style={{height:500}}>
+                                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
+                                </ScrollArea.Viewport>
+                                <ScrollArea.Scrollbar orientation="horizontal">
+                                <ScrollArea.Thumb />
+                                </ScrollArea.Scrollbar>
+                                <ScrollArea.Scrollbar orientation="vertical">
+                                <ScrollArea.Thumb />
+                                </ScrollArea.Scrollbar>
+                                <ScrollArea.Corner />
+                            </ScrollArea.Root>
+                            
                         </div>
                     </div>
     
@@ -198,7 +221,7 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
 
                 {/* Valores e quantidade */}
                 <div id='detalhes' className='flex justify-between'>
-                    <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md w-12 p-1' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
+                    <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md  p-1' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
                     <strong>R$ {price.toFixed(2)}</strong>
                 </div>
             </div>
