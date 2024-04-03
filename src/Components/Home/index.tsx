@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom'
 import { UseStatesProps } from '../../Context/context'
 
 // Import Interface
-import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps, FilterProduct } from './interfacesHome'
+import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps, FilterProduct } from '../../interfaces/homeTypes'
 
 
 // Componente Home - Principal
