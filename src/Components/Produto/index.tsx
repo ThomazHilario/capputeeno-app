@@ -1,7 +1,13 @@
-
+// import React
 import {useState, useEffect} from 'react'
+
+// import React router dom
 import  {Link} from 'react-router-dom'
+
+// import Context
 import { UseStatesProps} from '../../Context/context'
+
+// import Icons
 import { SlActionUndo } from "react-icons/sl"
 
 
