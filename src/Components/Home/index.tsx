@@ -8,8 +8,10 @@ import {useNavigate} from 'react-router-dom'
 import { UseStatesProps } from '../../Context/context'
 
 // Import Interface
-import { Users, ButtonProps, ApiProps, ProdutoProps, NavegationProps, FilterProduct } from '../../interfaces/homeTypes'
+import { Users, ProdutoProps, NavegationProps, FilterProduct } from '../../interfaces/homeTypes'
 
+// import Components
+import { Button } from '../button'
 
 // Componente Home - Principal
 export default function Home(){
@@ -87,89 +89,6 @@ export default function Home(){
         )
    }
 }
-
-// Componente Button
-function Button({name, lista, setLista}:ButtonProps){
-
-    useEffect(() => {
-        // Fazendo requisicao a api
-        async function loadlistaDefault() {
-            try {
-                // Recebendo resposta
-                const response = await fetch('https://api-rockeatseat.vercel.app')
-
-                // Transformando a resposta em dados consumiveis
-                const data = await response.json()
-
-                // Armazenando o resultado na state lista
-                setListadefault(data)
-
-            } catch (e) {
-                console.log(e)
-            }
-        }
-
-        // chamando a funcao
-        loadlistaDefault()
-    },[])
-
-    // Lista - padrao
-    const [listadefault, setListadefault] = useState(lista)
-
-    // Requisicao
-    function requestApi(){
-        // Filtrando o array somente com as Camisetas
-        const blusas:Users[] = listadefault.filter(({category}:ApiProps) => category === 't-shirts')
-
-        // Filtrando o array somente com as Canecas
-        const canecas:Users[] = listadefault.filter(({category}:ApiProps) => category === 'mugs')
-
-
-        if(name === 'Camisetas'){
-            // Capturando tag select
-            const select = document.getElementById('filtro-de-selecao') as HTMLSelectElement
-
-            // Alterando o valor para default
-            select.value = 'default'
-
-            // Setando nova lista
-            setLista(blusas)
-
-            // Alterando o display do navegationProgress
-            const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
-            navegatinProgress.style.display = 'none'
-        }
-
-        if(name === 'Canecas'){
-            // Capturando o filtro
-            const select = document.getElementById('filtro-de-selecao') as HTMLSelectElement
-
-            // Alterando o valor para default
-            select.value = 'default'      
-
-            // Setando nova lista
-            setLista(canecas)
-
-            // Alterando o display do navegationProgress
-            const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
-            navegatinProgress.style.display = 'none'
-
-        }
-
-        if(name === 'Todos os produtos'){
-            setLista(listadefault)  
-
-            // Alterando o display do navegationProgress
-            const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
-            navegatinProgress.style.display = 'flex'
-        }               
-
-        
-    }
-
-    return <button  className='first:border-2 border-b-amber-500' onClick={requestApi}>{name}</button>
-}
-// -------------------------------------
 
 // Componente FilterProducts
 function FilterProducts({lista,setLista}:FilterProduct){
