@@ -6,44 +6,44 @@
 @tailwind utilities;
 
 .titulo{
-    font-family: 'Saira Stencil One', sans-serif;
-    font-weight:400;
-    font-size:40px;
-    color:rgba(93, 93, 109, 1);
+  font-family: 'Saira Stencil One', sans-serif;
+  font-weight:400;
+  font-size:40px;
+  color:rgba(93, 93, 109, 1);
 }
 
 /* header */
 header{
-    height:80px;
+  height:80px;
 }
 
 /* descricao do produto */
 .name_produto{
-    font-family:'Saira', sans-serif;
-    opacity:0.7;
+  font-family:'Saira', sans-serif;
+  opacity:0.7;
 }
 #step-button-only{
-    width:30px;
-    border-radius:3px;
+  width:30px;
+  border-radius:3px;
 
-    border: 1px solid orange;
+  border: 1px solid orange;
 }
 
 .step-button{
-    width:30px;
-    border-radius:3px;
+  width:30px;
+  border-radius:3px;
 
-    background-color: rgb(203 213 225);
+  background-color: rgb(203 213 225);
 }
 
 .step-button-progress{
-    width:30px;
-    border-radius:3px;
+  width:30px;
+  border-radius:3px;
 
-    background-color: rgb(203 213 225);
+  background-color: rgb(203 213 225);
 }
 
 .produto:hover{
-    transition: 0.1s;
-    cursor: pointer;
+  transition: 0.1s;
+  cursor: pointer;
 }
