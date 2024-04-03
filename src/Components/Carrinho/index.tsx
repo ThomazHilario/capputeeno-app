@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 // import types
 import { Users } from '../Home/../../interfaces/homeTypes'
+import { ProductType, PartOfThePurchaseType } from '../../interfaces/cartType'
 
 // import Context
 import { UseStatesProps } from '../../Context/context'
@@ -93,20 +94,6 @@ export default function Carrinho(){
             </section>
         )
     }
-}
-
-// Tipagem do componente produto
-interface ProductType{
-    name:string,
-    img:string,
-    price:number,
-    priceAtually:number,
-    amount:number,
-    index:number,
-    setCartTotalValue:React.Dispatch<React.SetStateAction<number>>,
-    cartProduct:Users[],
-    setCartProduct:React.Dispatch<React.SetStateAction<Users[]>>,
-    setCartValue:React.Dispatch<React.SetStateAction<object[]>>
 }
 
 // Componente produto
@@ -227,11 +214,6 @@ function Product({img, name, price, amount, index, cartProduct, setCartProduct, 
             </div>
         </article>
     )
-}
-
-
-interface PartOfThePurchaseType{
-    cartTotalValue:number
 }
 
 // Componente PartOfThePurchase
