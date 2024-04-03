@@ -1,5 +1,5 @@
 import {createContext, useState, useContext, useEffect} from 'react'
-import { ThemeChildren, PropsCart } from './interfaceContext'
+import { ThemeChildren, PropsCart } from '../interfaces/contextType'
 
 
 // Criando Contexto
