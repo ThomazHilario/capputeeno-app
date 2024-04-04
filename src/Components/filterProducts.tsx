@@ -1,5 +1,5 @@
 // imports React
-import { useMemo,useState } from "react"
+import { useState } from "react"
 
 // imports interfaces
 import { FilterProduct } from '../interfaces/homeTypes'
@@ -8,16 +8,8 @@ import { FilterProduct } from '../interfaces/homeTypes'
 import * as Dialog from '@radix-ui/react-dialog'
 
 export const FilterProducts = ({lista,setLista}:FilterProduct) => {
- 
-    // Salvando a lista no cache, evitando fazer outra requisição
-    const listaDefaultCache = useMemo(() => {
-        return lista
-    },[lista])
 
-    // state - listaDefault
-    const [listaDefault, setListaDefault] = useState([...listaDefaultCache])
-
-    const [filterValue, setFilterValue] = useState('Default')
+    const [filterValue, setFilterValue] = useState('Organizar por')
 
 
     // Filter
@@ -25,29 +17,22 @@ export const FilterProducts = ({lista,setLista}:FilterProduct) => {
         // Setando novo valor da state filterValue
         setFilterValue(option)
 
-        // Setando a lista do cache
-        setListaDefault([...listaDefaultCache])
-
         // Opções de filtragens
         if(option === 'Maior Preço'){
-            const newLista = listaDefault.sort((a,b) => b.price_in_cents - a.price_in_cents)
-            setLista(newLista)
+            const newLista = lista.sort((a,b) => b.price_in_cents - a.price_in_cents)
+            setLista([...newLista])
+
         } 
         
         if(option === 'Menor Preço'){
-            const newLista = listaDefault.sort((a,b) => a.price_in_cents - b.price_in_cents)
-            setLista(newLista)
+            const newLista = lista.sort((a,b) => a.price_in_cents - b.price_in_cents)
+            setLista([...newLista])
         }
         
         if(option === 'Mais Vendidos'){
-            const newLista = listaDefault.sort((a,b) => a.sales - b.sales)
-            setLista(newLista)
+            const newLista = lista.sort((a,b) => a.sales - b.sales)
+            setLista([...newLista])
         }
-
-        if(option === 'Default'){
-            setLista(listaDefault)
-        }
-
     }
 
     return(
@@ -56,7 +41,6 @@ export const FilterProducts = ({lista,setLista}:FilterProduct) => {
 
             <Dialog.Content className="absolute bg-white w-[91.6%] sm:w-56 flex flex-col
             left-[4.2%] sm:left-[12.5%] md:left-auto md:right-[8.3%] lg:right-[12.5%] top-[10.5rem] md:top-[9rem]">
-                <Dialog.Close onClick={() => filter('Default')}>Default</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Maior Preço')}>Maior Preço</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Menor Preço')}>Menor Preço</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Mais Vendidos')}>Mais Vendidos</Dialog.Close>
