@@ -1,6 +1,3 @@
-// imports React
-import { useState } from "react"
-
 // imports interfaces
 import { FilterProduct } from '../interfaces/homeTypes'
 
