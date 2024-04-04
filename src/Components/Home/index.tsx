@@ -61,7 +61,7 @@ export default function Home(){
 
    } else{
         return(
-            <section className='w-7/12 md:w-8/12 lg:w-9/12'>
+            <section className='w-8/12 sm:w-9/12 md:w-10/12 lg:w-9/12'>
 
                 {/* navegacao dos produtos */}
                 <nav className='mt-8 flex flex-col md:flex-row justify-between'>
@@ -80,7 +80,7 @@ export default function Home(){
                 <NavegationProgress setPrev={setPrev} setNext={setNext} prev={prev} next={next}/>
 
                 {/* Container dos produtos listados */}
-                <div id='container_produtos' className='h-auto mt-8 mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4' >
+                <div id='container_produtos' className='h-auto mt-8 mb-12 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4' >
 
                     {/* Percorrendo cada produto */}
                     {listFilter.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}
