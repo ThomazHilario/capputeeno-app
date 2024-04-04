@@ -1,6 +1,9 @@
 // import React
 import { useState, useEffect } from "react"
 
+// import Context
+import { UseStatesProps } from "../Context/context"
+
 // import interface
 import { ButtonProps, Users, ApiProps } from '../interfaces/homeTypes'
 
@@ -27,6 +30,9 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
         loadlistaDefault()
     },[])
 
+    // Context
+    const { setFilterValue } = UseStatesProps()
+
     // Lista - padrao
     const [listadefault, setListadefault] = useState(lista)
 
@@ -40,6 +46,9 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
 
 
         if(name === 'Camisetas'){
+            // Alterando valor da state do select
+            setFilterValue('Organizar por')
+
             // Setando nova lista
             setLista(blusas)
 
@@ -49,6 +58,8 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
         }
 
         if(name === 'Canecas'){    
+            // Alterando valor da state do select
+            setFilterValue('Organizar por')
 
             // Setando nova lista
             setLista(canecas)
@@ -60,6 +71,10 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
         }
 
         if(name === 'Todos os produtos'){
+            // Alterando valor da state do select
+            setFilterValue('Organizar por')
+
+            // Retornando a lista padrao
             setLista(listadefault)  
 
             // Alterando o display do navegationProgress
