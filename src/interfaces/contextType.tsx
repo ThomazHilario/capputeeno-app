@@ -6,6 +6,8 @@ export interface PropsCart{
     setCartValue:React.Dispatch<React.SetStateAction<object[]>>,
     seach:string,
     setSeach:React.Dispatch<React.SetStateAction<string>>
+    category:string,
+    setCategory:React.Dispatch<React.SetStateAction<string>>
 }
 
 // Tipagem do Provider

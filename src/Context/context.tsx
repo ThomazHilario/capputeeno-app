@@ -20,8 +20,11 @@ export default function ContextCart({children}:ThemeChildren){
     // seach - state
     const [seach, setSeach] = useState<string>('')
 
+    // category
+    const [category, setCategory] = useState<string>('')
+
     return(
-        <Context.Provider value={{cartValue,setCartValue, seach, setSeach}}>
+        <Context.Provider value={{cartValue,setCartValue, seach, setSeach, category, setCategory}}>
             {children}
         </Context.Provider>
     )
