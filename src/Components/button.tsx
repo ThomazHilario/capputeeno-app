@@ -81,5 +81,5 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
         
     }
 
-    return <button  className='first:border-2 border-b-amber-500' onClick={requestApi}>{name}</button>
+    return <button  className='whitespace-nowrap' onClick={requestApi}>{name}</button>
 }

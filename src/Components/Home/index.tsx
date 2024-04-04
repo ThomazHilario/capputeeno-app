@@ -61,12 +61,12 @@ export default function Home(){
 
    } else{
         return(
-            <section className='w-8/12 sm:w-9/12 md:w-10/12 lg:w-9/12'>
+            <section className='w-11/12 sm:w-9/12 md:w-10/12 lg:w-9/12'>
 
                 {/* navegacao dos produtos */}
                 <nav className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
-                    <div className='flex gap-5'>
+                    <div className='flex gap-2'>
                         <Button name={'Todos os produtos'} lista={lista} setLista={setLista} />
                         <Button name={'Camisetas'} lista={lista} setLista={setLista} />
                         <Button name={'Canecas'} lista={lista} setLista={setLista} />

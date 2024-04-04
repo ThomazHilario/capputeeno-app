@@ -39,7 +39,7 @@ export const FilterProducts = ({lista,setLista}:FilterProduct) => {
             setLista(newLista)
         }
         
-        if(option === 'Mair Vendidos'){
+        if(option === 'Mais Vendidos'){
             const newLista = listaDefault.sort((a,b) => a.sales - b.sales)
             setLista(newLista)
         }
@@ -52,14 +52,14 @@ export const FilterProducts = ({lista,setLista}:FilterProduct) => {
 
     return(
         <Dialog.Root>
-            <Dialog.Trigger className="bg-white w-56 rounded-sm">{filterValue}</Dialog.Trigger>
+            <Dialog.Trigger className="w-full sm:w-56 bg-white  rounded-sm">{filterValue}</Dialog.Trigger>
 
-            <Dialog.Content className="absolute bg-white w-56 flex flex-col
-            right-[12.5%] top-[9rem]">
+            <Dialog.Content className="absolute bg-white w-[91.6%] sm:w-56 flex flex-col
+            left-[4.2%] sm:left-[12.5%] md:left-auto md:right-[8.3%] lg:right-[12.5%] top-[10.5rem] md:top-[9rem]">
                 <Dialog.Close onClick={() => filter('Default')}>Default</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Maior Preço')}>Maior Preço</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Menor Preço')}>Menor Preço</Dialog.Close>
-                <Dialog.Close onClick={() => filter('Mair Vendidos')}>Mais Vendidos</Dialog.Close>
+                <Dialog.Close onClick={() => filter('Mais Vendidos')}>Mais Vendidos</Dialog.Close>
             </Dialog.Content>
 
         </Dialog.Root>
