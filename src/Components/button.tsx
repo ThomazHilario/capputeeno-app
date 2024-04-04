@@ -40,12 +40,6 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
 
 
         if(name === 'Camisetas'){
-            // Capturando tag select
-            const select = document.getElementById('filtro-de-selecao') as HTMLSelectElement
-
-            // Alterando o valor para default
-            select.value = 'default'
-
             // Setando nova lista
             setLista(blusas)
 
@@ -54,12 +48,7 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
             navegatinProgress.style.display = 'none'
         }
 
-        if(name === 'Canecas'){
-            // Capturando o filtro
-            const select = document.getElementById('filtro-de-selecao') as HTMLSelectElement
-
-            // Alterando o valor para default
-            select.value = 'default'      
+        if(name === 'Canecas'){    
 
             // Setando nova lista
             setLista(canecas)

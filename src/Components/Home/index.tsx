@@ -66,7 +66,7 @@ export default function Home(){
                 {/* navegacao dos produtos */}
                 <nav className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
-                    <div className='flex gap-2'>
+                    <div className='flex justify-center mb-2 sm:justify-start md:mb-0 gap-2'>
                         <Button name={'Todos os produtos'} lista={lista} setLista={setLista} />
                         <Button name={'Camisetas'} lista={lista} setLista={setLista} />
                         <Button name={'Canecas'} lista={lista} setLista={setLista} />
