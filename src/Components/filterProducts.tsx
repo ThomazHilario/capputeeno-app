@@ -7,9 +7,13 @@ import { FilterProduct } from '../interfaces/homeTypes'
 // import radix
 import * as Dialog from '@radix-ui/react-dialog'
 
+// import Context
+import { UseStatesProps } from "../Context/context"
+
 export const FilterProducts = ({lista,setLista}:FilterProduct) => {
 
-    const [filterValue, setFilterValue] = useState('Organizar por')
+    // state - filterValue
+    const {filterValue, setFilterValue} = UseStatesProps()
 
 
     // Filter

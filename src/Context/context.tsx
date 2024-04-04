@@ -21,10 +21,10 @@ export default function ContextCart({children}:ThemeChildren){
     const [seach, setSeach] = useState<string>('')
 
     // category
-    const [category, setCategory] = useState<string>('')
+    const [filterValue, setFilterValue] = useState<string>('Organizar por')
 
     return(
-        <Context.Provider value={{cartValue,setCartValue, seach, setSeach, category, setCategory}}>
+        <Context.Provider value={{cartValue,setCartValue, seach, setSeach, filterValue, setFilterValue}}>
             {children}
         </Context.Provider>
     )
