@@ -7,7 +7,7 @@ import { UseStatesProps } from "../Context/context"
 // import interface
 import { ButtonProps, Users, ApiProps } from '../interfaces/homeTypes'
 
-export const Button = ({name, lista, setLista}:ButtonProps) => {
+export const Button = ({lista, setLista}:ButtonProps) => {
     useEffect(() => {
         // Fazendo requisicao a api
         async function loadlistaDefault() {
@@ -36,8 +36,14 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
     // Lista - padrao
     const [listadefault, setListadefault] = useState(lista)
 
+    // value
+    const [value, setValue] = useState('Todos os produtos')
+
     // Requisicao
-    function requestApi(){
+    function requestApi(value){
+        // Salvando o valor da state
+        setValue(value)
+
         // Filtrando o array somente com as Camisetas
         const blusas:Users[] = listadefault.filter(({category}:ApiProps) => category === 't-shirts')
 
@@ -45,7 +51,7 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
         const canecas:Users[] = listadefault.filter(({category}:ApiProps) => category === 'mugs')
 
 
-        if(name === 'Camisetas'){
+        if(value === 'Camisetas'){
             // Alterando valor da state do select
             setFilterValue('Organizar por')
 
@@ -57,7 +63,7 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
             navegatinProgress.style.display = 'none'
         }
 
-        if(name === 'Canecas'){    
+        if(value === 'Canecas'){    
             // Alterando valor da state do select
             setFilterValue('Organizar por')
 
@@ -70,7 +76,7 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
 
         }
 
-        if(name === 'Todos os produtos'){
+        if(value === 'Todos os produtos'){
             // Alterando valor da state do select
             setFilterValue('Organizar por')
 
@@ -85,5 +91,16 @@ export const Button = ({name, lista, setLista}:ButtonProps) => {
         
     }
 
-    return <button  className='whitespace-nowrap' onClick={requestApi}>{name}</button>
+    return( 
+        <div className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
+            <button className={`whitespace-nowrap ${value === 'Todos os produtos' && 'border-b-2 border-orange-500'}`} onClick={(e) => requestApi(e.target.textContent)}>Todos os produtos</button>
+
+            <button className={`whitespace-nowrap 
+            ${value === 'Camisetas' && 'border-b-2 border-orange-500'}`} 
+            onClick={(e) => requestApi(e.target.textContent)}>Camisetas</button>
+
+            <button className={`whitespace-nowrap ${value === 'Canecas' && 'border-b-2 border-orange-500'}`} onClick={(e) => requestApi(e.target.textContent)}>Canecas</button>
+
+        </div>
+)
 }

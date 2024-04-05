@@ -66,11 +66,9 @@ export default function Home(){
                 {/* navegacao dos produtos */}
                 <nav className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
-                    <div className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
-                        <Button name={'Todos os produtos'} lista={lista} setLista={setLista} />
-                        <Button name={'Camisetas'} lista={lista} setLista={setLista} />
-                        <Button name={'Canecas'} lista={lista} setLista={setLista} />
-                    </div>
+                    
+                    <Button lista={lista} setLista={setLista} />
+                        
 
                     {/* Filtro dos produtos */}
                     <FilterProducts lista={lista} setLista={setLista}/>
@@ -91,3 +89,9 @@ export default function Home(){
         )
    }
 }
+
+/*
+
+    
+
+*/
