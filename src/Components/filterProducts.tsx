@@ -42,9 +42,9 @@ export const FilterProducts = ({lista,setLista}:FilterProduct) => {
 
             <Dialog.Content className="absolute bg-white w-[91.6%] sm:w-56 flex flex-col
             left-[4.2%] sm:left-[12.5%] md:left-auto md:right-[8.3%] lg:right-[12.5%] top-[11.2rem] md:top-[9.2rem]">
-                <Dialog.Close onClick={() => filter('Maior Preço')}>Maior Preço</Dialog.Close>
-                <Dialog.Close onClick={() => filter('Menor Preço')}>Menor Preço</Dialog.Close>
-                <Dialog.Close onClick={() => filter('Mais Vendidos')}>Mais Vendidos</Dialog.Close>
+                <Dialog.Close className='p-1' onClick={() => filter('Maior Preço')}>Maior Preço</Dialog.Close>
+                <Dialog.Close className='p-1' onClick={() => filter('Menor Preço')}>Menor Preço</Dialog.Close>
+                <Dialog.Close className='p-1' onClick={() => filter('Mais Vendidos')}>Mais Vendidos</Dialog.Close>
             </Dialog.Content>
 
         </Dialog.Root>
