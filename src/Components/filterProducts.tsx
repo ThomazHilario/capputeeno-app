@@ -38,10 +38,10 @@ export const FilterProducts = ({lista,setLista}:FilterProduct) => {
 
     return(
         <Dialog.Root>
-            <Dialog.Trigger className="w-full sm:w-56 bg-white  rounded-sm">{filterValue}</Dialog.Trigger>
+            <Dialog.Trigger className="p-1 w-full sm:w-56 bg-white  rounded-sm">{filterValue}</Dialog.Trigger>
 
             <Dialog.Content className="absolute bg-white w-[91.6%] sm:w-56 flex flex-col
-            left-[4.2%] sm:left-[12.5%] md:left-auto md:right-[8.3%] lg:right-[12.5%] top-[10.5rem] md:top-[9rem]">
+            left-[4.2%] sm:left-[12.5%] md:left-auto md:right-[8.3%] lg:right-[12.5%] top-[11.2rem] md:top-[9.2rem]">
                 <Dialog.Close onClick={() => filter('Maior Preço')}>Maior Preço</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Menor Preço')}>Menor Preço</Dialog.Close>
                 <Dialog.Close onClick={() => filter('Mais Vendidos')}>Mais Vendidos</Dialog.Close>
