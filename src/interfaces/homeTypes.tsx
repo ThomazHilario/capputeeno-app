@@ -13,7 +13,6 @@ export interface Users {
 
 // Criando tipagem para as propriedades do button
 export interface ButtonProps{
-    name:string,
     lista:Users[],
     setLista:React.Dispatch<React.SetStateAction<Users[]>>
 }
