@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { UseStatesProps } from '../Context/context'
 
 // import icon
-import bagIcon from '../assets/bag_icons/bag32.png'
+import { LuShoppingBag } from "react-icons/lu";
 
 export const Header = () => {
     // Pegando a state global cartValue
@@ -26,8 +26,8 @@ export const Header = () => {
 
         {/* icone carrinho de compras */}
         <div id='carrinho' className='flex justify-center items-center'>
-          <Link to='/carrinho'><img src={bagIcon} alt='imagem do carrinho' className='cursor-pointer'/></Link>
-          <span className='bg-red-400 h-4 w-4 rounded-full flex justify-center items-center text-sm md: absolute top-11 end-20 '>{cartValue ? cartValue.length : 0}</span>
+          <Link to='/carrinho'><LuShoppingBag size={30}/></Link>
+          <span className='bg-red-400 h-4 w-4 rounded-full flex justify-center items-center text-sm md: absolute top-11 right-[4.9rem] '>{cartValue ? cartValue.length : 0}</span>
         </div>
       </nav>
       
