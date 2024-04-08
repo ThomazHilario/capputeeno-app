@@ -5,12 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* descricao do produto */
-.name_produto{
-  font-family:'Saira', sans-serif;
-  opacity:0.7;
-}
-
 #step-button-only{
   width:30px;
   border-radius:3px;

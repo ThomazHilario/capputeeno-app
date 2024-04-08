@@ -21,14 +21,14 @@ export const Produto = ({img,name,price}:ProdutoProps) => {
     }
 
     return(
-        <div className='produto bg-gray-100 rounded-t-lg' onClick={navegationPage}>
+        <div className='produto bg-gray-100 rounded-t-lg font-saira' onClick={navegationPage}>
 
                 {/* imagem do produto */}
                 <img src={img} alt='imagem do produto' className='h-auto rounded-t-lg'/>
 
                 {/* Descricao dos produtos */}
                 <div id='descricao-dos-produtos' className='flex flex-col gap-2 p-3 '>
-                    <p className='name_produto text-1xl'>{name}</p>
+                    <p className='name_produto text-1xl opacity-70'>{name}</p>
                     <hr/>
                     <p><strong>RS {Math.ceil(price / 80).toFixed(2).replace('.',',')}</strong></p>
                 </div>
