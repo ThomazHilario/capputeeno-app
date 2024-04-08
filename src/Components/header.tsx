@@ -27,7 +27,7 @@ export const Header = () => {
         {/* icone carrinho de compras */}
         <div id='carrinho' className='flex justify-center items-center'>
           <Link to='/carrinho'><LuShoppingBag size={30}/></Link>
-          <span className='bg-red-400 h-4 w-4 rounded-full flex justify-center items-center text-sm md: absolute top-11 right-[4.9rem] '>{cartValue ? cartValue.length : 0}</span>
+          <span className='bg-red-400 h-4 w-4 rounded-full flex justify-center items-center text-[0.8rem] font-bold md: absolute top-11 right-[4.9rem] '>{cartValue ? cartValue.length : 0}</span>
         </div>
       </nav>
       
