@@ -11,8 +11,3 @@
 
   border: 1px solid orange;
 }
-
-.produto:hover{
-  transition: 0.1s;
-  cursor: pointer;
-}

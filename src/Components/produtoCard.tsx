@@ -21,7 +21,7 @@ export const Produto = ({img,name,price}:ProdutoProps) => {
     }
 
     return(
-        <div className='produto bg-gray-100 rounded-t-lg font-saira' onClick={navegationPage}>
+        <div className='cursor-pointer bg-gray-100 rounded-t-lg font-saira' onClick={navegationPage}>
 
                 {/* imagem do produto */}
                 <img src={img} alt='imagem do produto' className='h-auto rounded-t-lg'/>
