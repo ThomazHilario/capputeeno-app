@@ -12,20 +12,6 @@
   border: 1px solid orange;
 }
 
-.step-button{
-  width:30px;
-  border-radius:3px;
-
-  background-color: rgb(203 213 225);
-}
-
-.step-button-progress{
-  width:30px;
-  border-radius:3px;
-
-  background-color: rgb(203 213 225);
-}
-
 .produto:hover{
   transition: 0.1s;
   cursor: pointer;

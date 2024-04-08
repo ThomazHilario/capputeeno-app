@@ -77,6 +77,7 @@ export const NavegationProgress = ({prev, next, setPrev, setNext}:NavegationProp
 
     // Avancando na pagina
     function nextProgress(){
+        
         // Armazenando cont na variavel value
         const value = cont
         
@@ -85,7 +86,7 @@ export const NavegationProgress = ({prev, next, setPrev, setNext}:NavegationProp
 
         // Primeiro step-button
         const btnStepPrimary:HTMLElement = document.getElementById('step-button-only') as HTMLElement
-
+        
         // percorrendo array de buttons
         button.forEach((button,idx) => {
 
@@ -118,12 +119,12 @@ export const NavegationProgress = ({prev, next, setPrev, setNext}:NavegationProp
     return(
         <div className='flex gap-1 justify-start md:justify-end mt-4 lg:justify-end' id='navegatinProgress'>
             <button id='step-button-only' className='bg-slate-300'>1</button>
-            <button className='step-button'>2</button>
-            <button className='step-button'>3</button>
-            <button className='step-button'>4</button>
-            <button className='step-button'>5</button>
-            <button className='step-button-progress' id='step-prev' onClick={prevProgress}>&lsaquo;</button>
-            <button className='step-button-progress' id='step-next' onClick={nextProgress}>&rsaquo;</button>
+            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>2</button>
+            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>3</button>
+            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>4</button>
+            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>5</button>
+            <button className='bg-[#cbd5e1] w-[1.8rem] rounded-sm' id='step-prev' onClick={prevProgress}>&lsaquo;</button>
+            <button className='bg-[#cbd5e1] w-[1.8rem] rounded-sm' id='step-next' onClick={nextProgress}>&rsaquo;</button>
         </div>
     )
 }
