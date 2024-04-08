@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'saira-stencil-one':'Saira Stencil One',
+      'saira':'Saira'
+    }
   },
   plugins: [],
 }
