@@ -89,18 +89,18 @@ export default function Produto(){
     }
 
     return(
-        <section id='container_produto_details'>
+        <section className='p-2 h-screen'>
 
             {/* Link de navegacao */}
-            <nav className='mt-6 mb-7 flex items-center gap-2'>
+            <nav className='my-5 flex items-center gap-2'>
                 <SlActionUndo/>
                 <Link to='/'>Voltar</Link>
             </nav>
 
-            <div className='flex flex-col gap-10 mb-14 lg:flex-row p-2' id='produto_details'>
+            <div className='flex flex-col gap-10 lg:flex-row p-2'>
                 
                 {/* imagem do produto */}
-                <div id='imagem_do_produto'>
+                <div>
                     <img src={produto?.image_url} alt="imagem do produto" className='h-48 m-auto md:h-72 lg:h-full'/>
                 </div>
 
