@@ -40,9 +40,10 @@ export const Button = ({lista, setLista}:ButtonProps) => {
     const [value, setValue] = useState('Todos os produtos')
 
     // Requisicao
-    function requestApi(value){
+    function requestApi(filterValue:string){
+        
         // Salvando o valor da state
-        setValue(value)
+        setValue(filterValue)
 
         // Filtrando o array somente com as Camisetas
         const blusas:Users[] = listadefault.filter(({category}:ApiProps) => category === 't-shirts')
@@ -51,7 +52,7 @@ export const Button = ({lista, setLista}:ButtonProps) => {
         const canecas:Users[] = listadefault.filter(({category}:ApiProps) => category === 'mugs')
 
 
-        if(value === 'Camisetas'){
+        if(filterValue === 'Camisetas'){
             // Alterando valor da state do select
             setFilterValue('Organizar por')
 
@@ -63,7 +64,7 @@ export const Button = ({lista, setLista}:ButtonProps) => {
             navegatinProgress.style.display = 'none'
         }
 
-        if(value === 'Canecas'){    
+        if(filterValue === 'Canecas'){    
             // Alterando valor da state do select
             setFilterValue('Organizar por')
 
@@ -76,7 +77,7 @@ export const Button = ({lista, setLista}:ButtonProps) => {
 
         }
 
-        if(value === 'Todos os produtos'){
+        if(filterValue === 'Todos os produtos'){
             // Alterando valor da state do select
             setFilterValue('Organizar por')
 
@@ -86,20 +87,19 @@ export const Button = ({lista, setLista}:ButtonProps) => {
             // Alterando o display do navegationProgress
             const navegatinProgress = document.getElementById('navegatinProgress') as HTMLElement
             navegatinProgress.style.display = 'flex'
-        }               
-
+        }             
         
     }
 
     return( 
         <div className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
-            <button className={`whitespace-nowrap ${value === 'Todos os produtos' && 'border-b-2 border-orange-500'}`} onClick={(e) => requestApi(e.target.textContent)}>Todos os produtos</button>
+            <button className={`whitespace-nowrap ${value === 'Todos os produtos' && 'border-b-2 border-orange-500'}`} onClick={() => requestApi('Todos os produtos')}>Todos os produtos</button>
 
             <button className={`whitespace-nowrap 
             ${value === 'Camisetas' && 'border-b-2 border-orange-500'}`} 
-            onClick={(e) => requestApi(e.target.textContent)}>Camisetas</button>
+            onClick={() => requestApi('Camisetas')}>Camisetas</button>
 
-            <button className={`whitespace-nowrap ${value === 'Canecas' && 'border-b-2 border-orange-500'}`} onClick={(e) => requestApi(e.target.textContent)}>Canecas</button>
+            <button className={`whitespace-nowrap ${value === 'Canecas' && 'border-b-2 border-orange-500'}`} onClick={() => requestApi('Canecas')}>Canecas</button>
 
         </div>
 )
