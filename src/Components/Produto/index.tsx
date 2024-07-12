@@ -97,15 +97,15 @@ export default function Produto(){
                 <Link to='/'>Voltar</Link>
             </nav>
 
-            <div className='flex flex-col gap-10 lg:flex-row p-2'>
+            <section className='flex flex-col gap-10 lg:flex-row p-2'>
                 
                 {/* imagem do produto */}
-                <div>
+                <figure>
                     <img src={produto?.image_url} alt="imagem do produto" className='h-48 m-auto md:h-72 lg:h-full'/>
-                </div>
+                </figure>
 
-                <div id='informacoes' className='flex flex-col justify-between'>
-                    <div id='descricao'>
+                <section id='informacoes' className='flex flex-col justify-between'>
+                    <article id='descricao'>
 
                         {/* Categoria */}
                         <p className='mb-4'>{produto?.name.includes('Camiseta') ? 'Camiseta' : 'Canecas'}</p>
@@ -123,11 +123,11 @@ export default function Produto(){
                         <h2 className='mt-20 text-xl mb-2 md:text-3xl'>Descricao</h2>
                         <p className='text-sm w-6/6 text-justify md:w-96'>Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto. </p>
                         
-                    </div>
+                    </article>
                     
                     <button  id='buttonAddCar' className='bg-blue-900 h-12 rounded-sm text-white font-bold mt-5' onClick={addCart}>Adicionar ao carrinho</button>
-                </div>
-            </div>
+                </section>
+            </section>
         </section>
     )
 }
