@@ -54,9 +54,9 @@ export default function Home(){
 
    if(carregado === true){
     return (
-    <div className='h-screen flex justify-center items-center'>
+    <section className='h-screen flex justify-center items-center'>
         <h1>Carregando</h1>
-    </div>
+    </section>
     )
 
    } else{
@@ -64,7 +64,7 @@ export default function Home(){
             <section className='w-11/12 sm:w-9/12 md:w-10/12 lg:w-9/12'>
 
                 {/* navegacao dos produtos */}
-                <nav className='mt-8 flex flex-col md:flex-row justify-between'>
+                <aside className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
                     
                     <Button lista={lista} setLista={setLista} />
@@ -73,17 +73,23 @@ export default function Home(){
                     {/* Filtro dos produtos */}
                     <FilterProducts lista={lista} setLista={setLista}/>
 
-                </nav>
+                </aside>
 
                 <NavegationProgress setPrev={setPrev} setNext={setNext} prev={prev} next={next}/>
 
                 {/* Container dos produtos listados */}
-                <div id='container_produtos' className='h-auto mt-8 mb-12 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4' >
+                <section id='container_produtos' className='min-h-screen mt-8 mb-12 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4' >
 
                     {/* Percorrendo cada produto */}
-                    {listFilter.slice(prev,next).map((item, idx) => <Produto key={idx} img={item.image_url} name={item.name} price={item.price_in_cents}/>)}
+                    {listFilter.slice(prev,next).map((item, idx) => (
+                        <Produto 
+                            key={idx} 
+                            img={item.image_url} 
+                            name={item.name} 
+                            price={item.price_in_cents}/>
+                    ))}
 
-                </div>
+                </section>
 
             </section>
         )
