@@ -59,9 +59,9 @@ export default function Carrinho(){
                 </nav>
     
                 {/* div  carrinho */}
-                <div id='carrinho_de_compras' className='mt-3 lg:flex justify-between'>
+                <section id='carrinho_de_compras' className='mt-3 lg:flex justify-between'>
                     {/* Listagem de produtos */}
-                    <div id='lista_de_Produtos'>
+                    <article id='lista_de_Produtos'>
     
                         {/* titulo da pagina */}
                         <h2 className='text-3xl'>Seu Carrinho</h2>
@@ -69,12 +69,26 @@ export default function Carrinho(){
                         {/* Quantidade de Produtos */}
                         <p className='mt-3 mb-5'>Total ({cartProduct.length} produtos) <strong>R$ {cartTotalValue && cartTotalValue.toFixed(2)}</strong></p>
     
-                        <div id='produtos'>
+                        <section id='produtos'>
                             {/* Percorrendo o array de produtos e retornando um compoonente para cada um */}
                             
                             <ScrollArea.Root className='p-2'>
                                 <ScrollArea.Viewport style={{height:400}}>
-                                    {cartProduct.map((item,idx) => <Product key={idx} name={item.name} img={item.image_url} price={item.price_in_cents}  priceAtually={item.priceAtually} amount={item.amount} cartProduct={cartProduct} setCartProduct={setCartProduct} setCartTotalValue={setCartTotalValue} setCartValue={setCartValue} index={idx}/>)}
+                                    {cartProduct.map((item,idx) => (
+                                        <Product 
+                                            key={idx} 
+                                            index={idx}
+                                            name={item.name} 
+                                            img={item.image_url} 
+                                            price={item.price_in_cents} 
+                                            priceAtually={item.priceAtually} 
+                                            amount={item.amount} 
+                                            cartProduct={cartProduct} 
+                                            setCartProduct={setCartProduct} 
+                                            setCartTotalValue={setCartTotalValue} 
+                                            setCartValue={setCartValue} 
+                                        />
+                                    ))}
                                 </ScrollArea.Viewport>
                                 <ScrollArea.Scrollbar orientation="horizontal">
                                 <ScrollArea.Thumb />
@@ -85,13 +99,13 @@ export default function Carrinho(){
                                 <ScrollArea.Corner />
                             </ScrollArea.Root>
                             
-                        </div>
-                    </div>
+                        </section>
+                    </article>
     
                     {cartProduct.length > 0 && <PartOfThePurchase cartTotalValue={cartTotalValue}/>}
     
                     {/* finalizar compra */}
-                </div>
+                </section>
     
             </section>
         )
