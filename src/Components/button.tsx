@@ -91,15 +91,18 @@ export const Button = ({lista, setLista}:ButtonProps) => {
         
     }
 
+    const buttonStyleForTailwind = 'whitespace-nowrap'
+    const buttonSelectStyleForTailwind = 'border-b-2 border-orange-500'
+
     return( 
         <div className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
-            <button className={`whitespace-nowrap ${value === 'Todos os produtos' && 'border-b-2 border-orange-500'}`} onClick={() => requestApi('Todos os produtos')}>Todos os produtos</button>
+            <button className={`${buttonStyleForTailwind} ${value === 'Todos os produtos' && buttonSelectStyleForTailwind}`} onClick={() => requestApi('Todos os produtos')}>Todos os produtos</button>
 
-            <button className={`whitespace-nowrap 
-            ${value === 'Camisetas' && 'border-b-2 border-orange-500'}`} 
+            <button className={`${buttonStyleForTailwind} 
+            ${value === 'Camisetas' && buttonSelectStyleForTailwind}`} 
             onClick={() => requestApi('Camisetas')}>Camisetas</button>
 
-            <button className={`whitespace-nowrap ${value === 'Canecas' && 'border-b-2 border-orange-500'}`} onClick={() => requestApi('Canecas')}>Canecas</button>
+            <button className={`${buttonStyleForTailwind} ${value === 'Canecas' && buttonSelectStyleForTailwind}`} onClick={() => requestApi('Canecas')}>Canecas</button>
 
         </div>
 )
