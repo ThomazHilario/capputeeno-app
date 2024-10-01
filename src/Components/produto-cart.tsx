@@ -107,11 +107,11 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
             </div>
 
             {/* div contendo detalhes do produto */}
-            <div className='flex flex-col h-24 justify-between pl-3 pr-3 w-11/12 lg:justify-evenly'>
+            <section className='flex flex-col h-24 justify-between pl-3 pr-3 w-11/12 lg:justify-evenly'>
                 {/* titulo e icon */}
                 <div id='titulo' className='flex items-center justify-between'>
                     <h2>{name}</h2>
-                    <MdOutlineDeleteForever size={22} onClick={removeItem}/>
+                    <MdOutlineDeleteForever cursor='pointer' size={22} onClick={removeItem}/>
                 </div>
 
                 {/* descricao do produto */}
@@ -122,7 +122,7 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
                     <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md  p-1 ' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
                     <strong>R$ {price.toFixed(2)}</strong>
                 </div>
-            </div>
+            </section>
         </article>
     )
 }
