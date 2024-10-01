@@ -30,7 +30,7 @@ export const Produto = ({img,name,price}:ProdutoProps) => {
                 <div id='descricao-dos-produtos' className='flex flex-col gap-2 p-3 '>
                     <p className='name_produto text-1xl opacity-70'>{name}</p>
                     <hr/>
-                    <p><strong>RS {Math.ceil(price / 80).toFixed(2).replace('.',',')}</strong></p>
+                    <p><strong>R$ {Math.ceil(price / 80).toFixed(2).replace('.',',')}</strong></p>
                 </div>
         </div>
     )
