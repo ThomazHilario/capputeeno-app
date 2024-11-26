@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // import types
-import { Users } from '../Home/../../interfaces/homeTypes'
+import { Users } from '../../interfaces/homeTypes'
 
 // import Context
 import { UseStatesProps } from '../../Context/context'
 
 // imports Components
-import { PartOfThePurchase } from '../part-of-the-purchase'
-import { Product } from '../produto-cart'
+import { PartOfThePurchase } from '../../Components/part-of-the-purchase'
+import { Product } from '../../Components/produto-cart'
 
 // import icons
 import { SlActionUndo } from "react-icons/sl";

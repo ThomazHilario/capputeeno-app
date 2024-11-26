@@ -10,10 +10,10 @@ import { UseStatesProps } from '../../Context/context'
 import { Users } from '../../interfaces/homeTypes'
 
 // import Components
-import { Produto } from '../produtoCard'
-import { Button } from '../button'
-import { FilterProducts } from '../filterProducts'
-import { NavegationProgress } from '../navigationProgress'
+import { Produto } from '../../Components/produtoCard'
+import { Button } from '../../Components/button'
+import { FilterProducts } from '../../Components/filterProducts'
+import { NavegationProgress } from '../../Components/navigationProgress'
 
 // Componente Home - Principal
 export default function Home(){
@@ -52,7 +52,7 @@ export default function Home(){
         loadLista()
     },[])
 
-   if(carregado === true){
+   if(carregado){
     return (
     <section className='h-screen flex justify-center items-center'>
         <h1>Carregando</h1>

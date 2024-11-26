@@ -1,8 +1,8 @@
 import '../index.css'
 import { Routes, Route } from 'react-router-dom'
-import Home from '../Components/Home'
-import Produto from '../Components/Produto'
-import Carrinho from '../Components/Carrinho'
+import Home from '../Pages/Home'
+import Produto from '../Pages/Produto'
+import Carrinho from '../Pages/Carrinho'
 
 export default function RoutesNavegation(){
     return(
