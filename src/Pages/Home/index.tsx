@@ -6,6 +6,9 @@ import {useState, useEffect } from 'react'
 // Import context
 import { UseStatesProps } from '../../Context/context'
 
+// Axios
+import { getData } from '../../Service/api-request'
+
 // Import Interface
 import { Users } from '../../interfaces/homeTypes'
 
