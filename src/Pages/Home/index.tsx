@@ -39,11 +39,10 @@ export default function Home(){
     useEffect(() => {
         async function loadLista(){
             try {
-                const response = await fetch('https://api-rockeatseat.vercel.app')
-                const data = await response.json()
-
+                const response = await getData(12,1)
+                
                 // Armazenando o resultado na state lista
-                setLista(data)
+                setLista(response?.data)
 
                 // Alterando a state carregado para true
                 setCarregado(false)
