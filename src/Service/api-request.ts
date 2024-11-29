@@ -10,9 +10,6 @@ export async function getData(limit?:number, page?:number, sort?:string, categor
                 sort,
                 category,
                 page
-            },headers:{
-                'Access-Control-Allow-Origin':'*',
-                'Content-Type': 'application/json'
             }
         })
 

@@ -1,130 +1,40 @@
-//import React
-import { useState, useEffect } from 'react'
+// store
+import { store } from '../Store/store'
 
-// imports interfaces
-import { NavegationProps } from '../interfaces/homeTypes'
+export const NavegationProgress = ({totalPages}:{totalPages:number[]}) => {
 
-export const NavegationProgress = ({prev, next, setPrev, setNext}:NavegationProps) => {
-    // State - contador
-    const [cont, setCont] = useState<number>(0)
+    // store
+    const { page, setPage } = store()
 
-    // Usando o useEffect para verificar o contador
-    useEffect(() => {
-
-        // Caso contador seja abaixo de 0
-        if(cont < 0){
-            setCont(0)
-            setPrev(0)
-            setNext(12)
-        }
-
-        // Caso contador seja maio que o total de buttons
-        if(cont > document.querySelectorAll('.step-button').length){
-            setCont(document.querySelectorAll('.step-button').length)
-        }
-
-    },[cont, setPrev, setNext])
-
-    // Voltando na pagina
-    function prevProgress(){
-
-        // Armazenando o valor de const a uma variavel
-        const value = cont - 2
-
-        // Captura os buttons por meio do querySelector
-        const button = document.querySelectorAll<HTMLElement>('.step-button')
-
-        // Primeiroo step-button
-        const btnStepPrimary:HTMLElement = document.getElementById('step-button-only') as HTMLElement
-
-        // Percorrendo cada button
-        button.forEach((button,idx) => {
-            
-            // Caso o value seja igual ao idx do button
-            if(value === idx){
-
-                // Decremento o contador
-                setCont(cont - 1)
-
-                // Alterando o background do step-button
-                button.style.border = '1px solid orange'
-                button.style.backgroundColor = 'rgb(203 213 225)'
-
-                // Alterando o slice do array
-                setPrev(prev - 12)
-                setNext(next - 12)
-
-                
-            } else if(cont === 1){
-                // Decremento o contador
-                setCont(cont -2)
-
-                // Adicionando style ao step button
-                button.style.border = '0px'
-                button.style.backgroundColor = 'rgb(203 213 225)'
-
-                // Alterando style do Primeiro step-button
-                btnStepPrimary.style.border = '1px solid orange'
-
-            } else{
-
-                // Adicionando style ao step button
-                button.style.border = '0px'
-                button.style.backgroundColor = 'rgb(203 213 225)'
-            }
-        })
+    // Logics from buttons steps
+    const buttonsStep = {
+        leftButtonDisable: {
+            disabled: page > totalPages[0] ? false : true
+        },
+        rightButtonDisable: {
+            disabled: page < totalPages[totalPages.length - 1] ? false : true
+        } 
     }
 
-    // Avancando na pagina
-    function nextProgress(){
-        
-        // Armazenando cont na variavel value
-        const value = cont
-        
-        // Captura os buttons
-        const button:NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.step-button')
+    // Style Step selected
+    const styleStepSelected = 'border-orange-400'
 
-        // Primeiro step-button
-        const btnStepPrimary:HTMLElement = document.getElementById('step-button-only') as HTMLElement
-        
-        // percorrendo array de buttons
-        button.forEach((button,idx) => {
-
-            // Alterando oo border do primeiiiro button
-            btnStepPrimary.style.border = '0px'
-
-            // Caso o contador seja igual ao idx
-            if(value === idx){
-
-
-                // Incrementa no contador
-                setCont(cont + 1)
-                button.style.backgroundColor = 'rgb(203 213 225)'
-                button.style.border = '1px solid orange'
-
-                // Alterando oo slice do array
-                setPrev(prev + 12)
-                setNext(next + 12)
-                
-
-            } else if(cont < 4){
-
-                // Adicionando style ao step-button
-                button.style.border = '0px'
-                button.style.backgroundColor = 'rgb(203 213 225)'
-            }
-        })
-    }
+    // Style buttons prev and next
+    const stylePrevAndNextButons = 'bg-[#cbd5e1] w-[1.8rem] rounded-sm disabled:bg-gray-400/30'
 
     return(
         <div className='flex gap-1 justify-start md:justify-end mt-4 lg:justify-end' id='navegatinProgress'>
-            <button id='step-button-only' className='bg-slate-300'>1</button>
-            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>2</button>
-            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>3</button>
-            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>4</button>
-            <button className='step-button bg-[#cbd5e1] w-[1.8rem] rounded-sm'>5</button>
-            <button className='bg-[#cbd5e1] w-[1.8rem] rounded-sm' id='step-prev' onClick={prevProgress}>&lsaquo;</button>
-            <button className='bg-[#cbd5e1] w-[1.8rem] rounded-sm' id='step-next' onClick={nextProgress}>&rsaquo;</button>
+
+            {/* Buttons page */}
+           {totalPages.map((numberPage, index) => (
+            <button key={index} className={`${page === numberPage && styleStepSelected} bg-[#cbd5e1] w-[1.8rem] rounded-sm border-2`} onClick={() => setPage(numberPage)}>{numberPage}</button>
+           ))}
+
+           {/* Button Prev */}
+           <button {...buttonsStep.leftButtonDisable} className={stylePrevAndNextButons} onClick={() => setPage(page - 1)}>&lsaquo;</button>
+
+           {/* Button Next */}
+           <button {...buttonsStep.rightButtonDisable} className={stylePrevAndNextButons} onClick={() => setPage(page + 1)}>&rsaquo;</button>
         </div>
     )
 }

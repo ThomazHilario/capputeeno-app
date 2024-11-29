@@ -12,6 +12,9 @@ import { getData } from '../../Service/api-request'
 // Import Interface
 import { Users } from '../../interfaces/homeTypes'
 
+// Store
+import { store } from '../../Store/store'
+
 // import Components
 import { Produto } from '../../Components/produtoCard'
 import { Button } from '../../Components/button'
@@ -21,11 +24,10 @@ import { NavegationProgress } from '../../Components/navigationProgress'
 // Componente Home - Principal
 export default function Home(){
 
-    const {seach} = UseStatesProps()
+    const {seach} = UseStatesProps() 
 
-    // variaveis para mudar a pagina
-    const [prev, setPrev] = useState<number>(0)
-    const [next, setNext] = useState<number>(12) 
+    // store
+    const { page, sort, category } = store()
 
     // State - lista
     const [lista, setLista] = useState<Users[]>([])
@@ -36,13 +38,19 @@ export default function Home(){
     // state - carregado
     const [carregado, setCarregado] = useState(true)
 
+    // State - totalPages
+    const [totalPages, setTotalPages] = useState<number[]>([])
+
     useEffect(() => {
         async function loadLista(){
             try {
-                const response = await getData(12,1)
+                const response = await getData(12, page, sort, category)
                 
                 // Armazenando o resultado na state lista
-                setLista(response?.data)
+                setLista(response?.data.data)
+
+                // Armazenando total de paginas
+                setTotalPages(response?.data.totalPage)
 
                 // Alterando a state carregado para true
                 setCarregado(false)
@@ -52,7 +60,7 @@ export default function Home(){
         }
 
         loadLista()
-    },[])
+    },[page, sort, category])
 
    if(carregado){
     return (
@@ -77,13 +85,13 @@ export default function Home(){
 
                 </aside>
 
-                <NavegationProgress setPrev={setPrev} setNext={setNext} prev={prev} next={next}/>
+                <NavegationProgress totalPages={totalPages}/>
 
                 {/* Container dos produtos listados */}
                 <section id='container_produtos' className='min-h-screen mt-8 mb-12 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4' >
 
                     {/* Percorrendo cada produto */}
-                    {listFilter.slice(prev,next).map((item, idx) => (
+                    {listFilter.map((item, idx) => (
                         <Produto 
                             key={idx} 
                             img={item.image_url} 
