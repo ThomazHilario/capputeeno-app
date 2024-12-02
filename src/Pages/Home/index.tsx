@@ -77,7 +77,7 @@ export default function Home(){
                 <aside className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
                     
-                    <Button lista={lista} setLista={setLista} />
+                    <Button />
                         
 
                     {/* Filtro dos produtos */}
