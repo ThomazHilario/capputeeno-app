@@ -82,7 +82,7 @@ export default function Home(){
                         
 
                     {/* Filtro dos produtos */}
-                    <FilterProducts lista={lista} setLista={setLista}/>
+                    <FilterProducts/>
 
                 </aside>
 

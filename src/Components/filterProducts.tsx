@@ -1,63 +1,44 @@
-// imports interfaces
-import { FilterProduct } from '../interfaces/homeTypes'
+// store
+import { store } from '../Store/store'
 
 // import radix
-import * as Dialog from '@radix-ui/react-dialog'
+import * as Select from '@radix-ui/react-select'
 
-// import Context
-import { UseStatesProps } from "../Context/context"
+export const FilterProducts = () => {
 
-export const FilterProducts = ({lista,setLista}:FilterProduct) => {
-
-    // state - filterValue
-    const {filterValue, setFilterValue} = UseStatesProps()
-
-
-    // Filter
-    function filter(option:string){
-        // Setando novo valor da state filterValue
-        setFilterValue(option)
-
-        // Opções de filtragens
-        if(option === 'Maior Preço'){
-            const newLista = lista.sort((a,b) => b.price_in_cents - a.price_in_cents)
-            setLista([...newLista])
-
-        } 
-        
-        if(option === 'Menor Preço'){
-            const newLista = lista.sort((a,b) => a.price_in_cents - b.price_in_cents)
-            setLista([...newLista])
-        }
-        
-        if(option === 'Mais Vendidos'){
-            const newLista = lista.sort((a,b) => a.sales - b.sales)
-            setLista([...newLista])
-        }
-    }
+    // store
+    const { setSort } = store()
 
     return(
-        <Dialog.Root>
-            <Dialog.Trigger className="p-1 w-full sm:w-56 bg-white  rounded-sm">{filterValue}</Dialog.Trigger>
+        <Select.Root onValueChange={(value) => setSort(value)}>
+            <Select.Trigger className='outline-none p-1 w-full sm:w-56 bg-white rounded-sm text-black'>
+                <Select.Value placeholder='Organizar Por'/>
+            </Select.Trigger>
+            
+            
+            <Select.Content className='mt-1 w-[91.5vw] sm:w-[224px] rounded-sm' position='popper'>
+                    <Select.Group className='bg-white'>
+                        <Select.Item value='desc' className='p-1 cursor-pointer'>
+                            <Select.ItemText>Maior Preço</Select.ItemText>
+                        </Select.Item>
+                        
+                        <Select.Item value='asc' className='p-1 cursor-pointer'>
+                            <Select.ItemText>Menor Preço</Select.ItemText>
+                        </Select.Item>
 
-            <Dialog.Content className="absolute bg-white w-[91.6%] sm:w-56 flex flex-col
-            left-[4.2%] sm:left-[12.5%] md:left-auto md:right-[8.3%] lg:right-[12.5%] top-[11.2rem] md:top-[9.2rem]">
-                <Dialog.Close className='p-1' onClick={() => filter('Maior Preço')}>Maior Preço</Dialog.Close>
-                <Dialog.Close className='p-1' onClick={() => filter('Menor Preço')}>Menor Preço</Dialog.Close>
-                <Dialog.Close className='p-1' onClick={() => filter('Mais Vendidos')}>Mais Vendidos</Dialog.Close>
-            </Dialog.Content>
-
-        </Dialog.Root>
+                        <Select.Item value='rating' className='p-1 cursor-pointer'>
+                            <Select.ItemText>Mais Vendidos</Select.ItemText>
+                        </Select.Item>
+                    </Select.Group>
+            </Select.Content>
+            
+            
+        </Select.Root>
     )
 }
 
 /* 
 
- <select name="filtro" id="filtro-de-selecao" className='w-40 mt-4 md:mt-0' onChange={(e) => filter(e.target.value)}>
-        <option value="default">Organizar por</option>
-        <option value="maior">Preço: maior-menor</option>
-        <option value="menor">Preço: menor-maior</option>
-        <option value="maisVendidos">Mais vendidos</option>
-</select>
+ 
 
 */

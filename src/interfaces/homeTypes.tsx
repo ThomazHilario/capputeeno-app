@@ -11,12 +11,6 @@ export interface ProductsProps {
     amount:number
 }
 
-// Interface filterProduct
-export interface FilterProduct{
-    lista:ProductsProps[]
-    setLista:React.Dispatch<React.SetStateAction<ProductsProps[]>>
-}
-
 // interface do Produto
 export interface ProdutoProps{
     img:string,
