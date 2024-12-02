@@ -11,12 +11,12 @@ export const store = create<StoreProps>((set) => ({
     })),
 
     sort:'',
-    setSort: (sortValue:string) => (() => ({
+    setSort: (sortValue:string) => set(() => ({
         sort:sortValue
     })),
 
     category:'all',
-    setCategory:(categoryValue:string) => (() => ({
+    setCategory:(categoryValue:string) => set(() => ({
         category:categoryValue
     }))
 }))

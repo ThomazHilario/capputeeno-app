@@ -10,14 +10,14 @@ import { UseStatesProps } from '../../Context/context'
 import { getData } from '../../Service/api-request'
 
 // Import Interface
-import { Users } from '../../interfaces/homeTypes'
+import { ProductsProps } from '../../interfaces/homeTypes'
 
 // Store
 import { store } from '../../Store/store'
 
 // import Components
 import { Produto } from '../../Components/produtoCard'
-import { Button } from '../../Components/button'
+import { NavigationForCategory } from '../../Components/navigation-for-category'
 import { FilterProducts } from '../../Components/filterProducts'
 import { NavegationProgress } from '../../Components/navigationProgress'
 
@@ -30,7 +30,7 @@ export default function Home(){
     const { page, sort, category } = store()
 
     // State - lista
-    const [lista, setLista] = useState<Users[]>([])
+    const [lista, setLista] = useState<ProductsProps[]>([])
 
     // Filtro de elementos
     const listFilter = lista.filter(products => products.name.toLowerCase().includes(seach.toLowerCase()) && products)
@@ -44,6 +44,7 @@ export default function Home(){
     useEffect(() => {
         async function loadLista(){
             try {
+                console.log(category)
                 const response = await getData(12, page, sort, category)
                 
                 // Armazenando o resultado na state lista
@@ -77,7 +78,7 @@ export default function Home(){
                 <aside className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
                     
-                    <Button />
+                    <NavigationForCategory />
                         
 
                     {/* Filtro dos produtos */}

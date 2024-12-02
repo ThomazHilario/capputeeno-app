@@ -1,30 +1,23 @@
-// Radix-UI
-import * as Tabs from '@radix-ui/react-tabs'
+// Store
+import { store } from "../Store/store"
 
-// Interface
-import { Users } from '../interfaces/homeTypes'
+export const NavigationForCategory = () => {
 
-export const NavigationForCategory = ({products}:{products:Users[]}) => {
-    return(
-        <Tabs.Root>
-            <Tabs.List>
-                <Tabs.Trigger value='all'>Todos os produtos</Tabs.Trigger>
-                <Tabs.Trigger value='t-shirts'>Camisetas</Tabs.Trigger>
-                <Tabs.Trigger value='mugs'>Canecas</Tabs.Trigger>
-            </Tabs.List>
+    // store
+    const { category, setCategory } = store()
 
-            {/* Section */}
-            <Tabs.Content value='all'>
-                
-            </Tabs.Content>
+    const buttonStyleForTailwind = 'whitespace-nowrap'
+    const buttonSelectStyleForTailwind = 'border-b-2 border-orange-500'
 
-            <Tabs.Content value='t-shirts'>
+    return( 
+        <div className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
+            <button value='all' className={`${buttonStyleForTailwind} ${category === 'all' && buttonSelectStyleForTailwind}`} onClick={() => setCategory('all')}>Todos os produtos</button>
 
-            </Tabs.Content>
+            <button className={`${buttonStyleForTailwind} ${category === 't-shirts' && buttonSelectStyleForTailwind}`} 
+            onClick={() => setCategory('t-shirts')}>Camisetas</button>
 
-            <Tabs.Content value='mugs'>
+            <button className={`${buttonStyleForTailwind} ${category === 'mugs' && buttonSelectStyleForTailwind}`} onClick={() => setCategory('mugs')}>Canecas</button>
 
-            </Tabs.Content>
-        </Tabs.Root>
-    )
+        </div>
+)
 }

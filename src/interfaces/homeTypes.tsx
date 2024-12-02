@@ -1,5 +1,5 @@
 // Interface da state lista
-export interface Users {
+export interface ProductsProps {
     category:string,
     description:string,
     id:string,
@@ -11,20 +11,10 @@ export interface Users {
     amount:number
 }
 
-// Criando tipagem para as propriedades do button
-export interface ButtonProps{
-    lista:Users[],
-    setLista:React.Dispatch<React.SetStateAction<Users[]>>
-}
-
-export interface ApiProps{
-    category:string
-}
-
 // Interface filterProduct
 export interface FilterProduct{
-    lista:Users[]
-    setLista:React.Dispatch<React.SetStateAction<Users[]>>
+    lista:ProductsProps[]
+    setLista:React.Dispatch<React.SetStateAction<ProductsProps[]>>
 }
 
 // interface do Produto
@@ -32,12 +22,4 @@ export interface ProdutoProps{
     img:string,
     name:string,
     price:number
-}
-
-// Componente NavegationProgress
-export interface NavegationProps{
-    prev:number,
-    next:number,
-    setPrev:React.Dispatch<React.SetStateAction<number>>;
-    setNext:React.Dispatch<React.SetStateAction<number>>;
 }
