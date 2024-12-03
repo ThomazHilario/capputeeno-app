@@ -5,7 +5,7 @@ export const PartOfThePurchase = ({cartTotalValue}:PartOfThePurchaseType) => {
         return(
             <aside className='flex flex-col justify-between bg-white w-12/12 lg:w-6/12 h-6/12'>
                 {/* Resumo dos pedidos */}
-                <div>
+                <section>
                     {/* titulo */}
                     <h2 className='mt-2 mb-4 pl-5 font-bold text-xl'>Resumo do Pedido</h2>
     
@@ -23,15 +23,15 @@ export const PartOfThePurchase = ({cartTotalValue}:PartOfThePurchaseType) => {
     
                     {/* Button */}
                     <button className='bg-green-500 block m-auto mt-4 mb-3 w-10/12 h-12 rounded-sm text-white'>FINALIZAR A COMPRA</button>
-                </div>
+                </section>
     
                 {/* Licencas */}
-                <div className='p-5'>
+                <section className='p-5'>
                     <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>AJUDA</a>
                     <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>REEMBOLSO</a>
                     <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>ENTREGAS E FRETE</a>
                     <a href='#' className='block underline underline-offset-1 text-gray-700 m-2'>TROCAS E DEVOLUÇÕES</a>
-                </div>
+                </section>
     
             </aside>
         )

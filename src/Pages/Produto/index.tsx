@@ -92,10 +92,8 @@ export default function Produto(){
         <section className='p-2 h-screen'>
 
             {/* Link de navegacao */}
-            <nav className='my-5 flex items-center gap-2'>
-                <SlActionUndo/>
-                <Link to='/'>Voltar</Link>
-            </nav>
+            <Link to='/' className='my-5 flex items-center gap-2'><SlActionUndo/> Voltar</Link>
+            
 
             <section className='flex flex-col gap-10 lg:flex-row p-2'>
                 
@@ -114,7 +112,7 @@ export default function Produto(){
                         <h1 className='text-4xl mb-3'>{produto?.name}</h1>
 
                         {/* Preco */}
-                        <h1 className='text-2xl'><strong>R$ {Math.ceil((produto?.price_in_cents as number) / 80).toFixed(2).replace('.',',')}</strong></h1>
+                        <h2 className='text-2xl'><strong>R$ {Math.ceil((produto?.price_in_cents as number) / 80).toFixed(2).replace('.',',')}</strong></h2>
                             
                         {/* Frete */}
                         <p className='text-xs mt-10 text-justify'>Frete de R$ 40,00 para todo o Brasil. Gratis para compras acima de R$ 90,00</p>

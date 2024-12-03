@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // import types
-import { Users } from '../../interfaces/homeTypes'
+import { ProductsProps } from '../../interfaces/homeTypes'
 
 // import Context
 import { UseStatesProps } from '../../Context/context'
@@ -24,7 +24,7 @@ export default function Carrinho(){
     useEffect(() => {
         // Verificando se tem ao menos um produto na localStorage
         if(JSON.parse(localStorage.getItem('@cartProduct') as string).length > 0){
-            const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:Users) => Math.ceil(i.price_in_cents))
+            const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:ProductsProps) => Math.ceil(i.price_in_cents))
 
             // Setando o valor do produto na state
             setCartTotalValue(value.reduce((i:number,a:number) => a += i))
@@ -35,7 +35,7 @@ export default function Carrinho(){
     },[])
 
     // state - Lista de produtos
-    const [cartProduct,setCartProduct] = useState<Users[]>([])
+    const [cartProduct,setCartProduct] = useState<ProductsProps[]>([])
 
     // state - valor total
     const [cartTotalValue,setCartTotalValue] = useState<number>(0)
@@ -54,9 +54,7 @@ export default function Carrinho(){
         return(
             <section className='w-11/12 lg:h-[89vh]'>
                 {/* Link de voltar a pagina home */}
-                <nav className='mt-5'>
-                    <Link to='/' className='flex items-center gap-2'><SlActionUndo/> Voltar</Link>
-                </nav>
+                <Link to='/' className='flex items-center gap-2 mt-5'><SlActionUndo/> Voltar</Link>
     
                 {/* div  carrinho */}
                 <section id='carrinho_de_compras' className='mt-3 lg:flex justify-between'>
