@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 
 // import Interfaces
-import { Users } from '../interfaces/homeTypes'
+import { ProductsProps } from '../interfaces/homeTypes'
 import { ProductType } from '../interfaces/cartType'
 
 // import react-icons
@@ -32,7 +32,7 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
         setCartValue(JSON.parse(localStorage.getItem('@cartProduct') as string))
 
         // Pegando da localStorage o novo array de produtos salvo
-        const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:Users) => Math.ceil(i.price_in_cents))
+        const value = JSON.parse(localStorage.getItem('@cartProduct') as string).map((i:ProductsProps) => Math.ceil(i.price_in_cents))
 
         if(value.length > 0){
             // Setando o valor do produto na state
@@ -67,7 +67,7 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
             setCartProduct([...cartProduct])
 
             // Pegando todos os valores do produtos
-            const value:number[] = cartProduct.map((i:Users) => Math.ceil(i.price_in_cents))
+            const value:number[] = cartProduct.map((i:ProductsProps) => Math.ceil(i.price_in_cents))
 
             // Setando na state o valor total dos produtos
             setCartTotalValue(value.reduce((i,a) => a += i))
@@ -89,7 +89,7 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
             setCartProduct([...cartProduct])
 
             // Pegando todos os valores do produtos
-            const value:number[] = cartProduct.map((i:Users) => Math.ceil(i.price_in_cents))
+            const value:number[] = cartProduct.map((i:ProductsProps) => Math.ceil(i.price_in_cents))
 
             // Setando na state o valor total dos produtos
             setCartTotalValue(value.reduce((i,a) => a += i))
@@ -101,27 +101,35 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
 
     return (
         <article className='flex items-center mt-4 mb-4 bg-white rounded-md lg:w-11/12 '>
-            {/* div contendo a imaggem */}
+            {/* div contendo a imagem */}
             <div>
                 <img src={img} alt='foto do produto' className='h-28 rounded-md lg:h-48'/>
             </div>
 
-            {/* div contendo detalhes do produto */}
+            {/* section contendo detalhes do produto */}
             <section className='flex flex-col h-24 justify-between pl-3 pr-3 w-11/12 lg:justify-evenly'>
+            
                 {/* titulo e icon */}
-                <div id='titulo' className='flex items-center justify-between'>
+                <article id='titulo' className='flex items-center justify-between'>
                     <h2>{name}</h2>
                     <MdOutlineDeleteForever cursor='pointer' size={22} onClick={removeItem}/>
-                </div>
+                </article>
 
                 {/* descricao do produto */}
                 <p className='hidden  text-sm lg:block mt-2 mb-4 w-11/12'>Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto.</p>
 
                 {/* Valores e quantidade */}
-                <div id='detalhes' className='flex justify-between'>
-                    <input type="number" min={1} className='w-8 text-center bg-gray-300 rounded-md  p-1 ' defaultValue={amount} onChange={(e) => updateValue(e.target.value)}/>
+                <section id='detalhes' className='flex justify-between'>
+                    <input 
+                        type="number" 
+                        min={1} 
+                        className='w-8 text-center bg-gray-300 rounded-md  p-1 ' 
+                        defaultValue={amount} 
+                        onChange={(e) => updateValue(e.target.value)}
+                    />
+
                     <strong>R$ {price.toFixed(2)}</strong>
-                </div>
+                </section>
             </section>
         </article>
     )
