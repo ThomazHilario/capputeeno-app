@@ -1,5 +1,5 @@
 // store
-import { store } from '../Store/store'
+import { store } from '../../Store/store'
 
 // import radix
 import * as Select from '@radix-ui/react-select'

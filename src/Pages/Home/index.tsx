@@ -16,24 +16,25 @@ import { ProductsProps } from '../../interfaces/homeTypes'
 import { store } from '../../Store/store'
 
 // import Components
-import { Produto } from '../../Components/produtoCard'
-import { NavigationForCategory } from '../../Components/navigation-for-category'
-import { FilterProducts } from '../../Components/filterProducts'
-import { NavegationProgress } from '../../Components/navigationProgress'
+import { Produto } from '../../Components/Home/Product/produtoCard'
+import { NavigationForCategory } from '../../Components/Home/Navigation-Products/navigation-for-category'
+import { FilterProducts } from '../../Components/Home/Filter-Products/filterProducts'
+import { NavegationProgress } from '../../Components/Home/Navigation-Products/navigationProgress'
 
 // Componente Home - Principal
 export default function Home(){
 
+    // Context
     const {seach} = UseStatesProps() 
 
-    // store
+    // store - zustand
     const { page, sort, category } = store()
 
     // State - lista
-    const [lista, setLista] = useState<ProductsProps[]>([])
+    const [products, setProducts] = useState<ProductsProps[]>([])
 
     // Filtro de elementos
-    const listFilter = lista.filter(products => products.name.toLowerCase().includes(seach.toLowerCase()) && products)
+    const listFilter = products.filter(products => products.name.toLowerCase().includes(seach.toLowerCase()) && products)
     
     // state - carregado
     const [carregado, setCarregado] = useState(true)
@@ -42,13 +43,13 @@ export default function Home(){
     const [totalPages, setTotalPages] = useState<number[]>([])
 
     useEffect(() => {
-        async function loadLista(){
+        async function loadProducts(){
             try {
                 console.log(category)
                 const response = await getData(12, page, sort, category)
                 
                 // Armazenando o resultado na state lista
-                setLista(response?.data.data)
+                setProducts(response?.data.data)
 
                 // Armazenando total de paginas
                 setTotalPages(response?.data.totalPage)
@@ -60,7 +61,7 @@ export default function Home(){
             }
         }
 
-        loadLista()
+        loadProducts()
     },[page, sort, category])
 
    if(carregado){
@@ -78,7 +79,7 @@ export default function Home(){
                 <aside className='mt-8 flex flex-col md:flex-row justify-between'>
                     {/* buttons */}
                     
-                    <NavigationForCategory />
+                    <NavigationForCategory/>
                         
 
                     {/* Filtro dos produtos */}
@@ -106,9 +107,3 @@ export default function Home(){
         )
    }
 }
-
-/*
-
-    
-
-*/
