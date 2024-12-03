@@ -1,5 +1,5 @@
 // Store
-import { store } from "../Store/store"
+import { store } from "../../../Store/store"
 
 export const NavigationForCategory = () => {
 
