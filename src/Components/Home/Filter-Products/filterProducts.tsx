@@ -26,7 +26,7 @@ export const FilterProducts = () => {
                             <Select.ItemText>Menor Preço</Select.ItemText>
                         </Select.Item>
 
-                        <Select.Item value='rating' className='p-1 cursor-pointer'>
+                        <Select.Item value='sales' className='p-1 cursor-pointer'>
                             <Select.ItemText>Mais Vendidos</Select.ItemText>
                         </Select.Item>
                     </Select.Group>
