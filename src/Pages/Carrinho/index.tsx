@@ -46,7 +46,10 @@ export default function Carrinho(){
     if(cartProduct.length === 0 ){
         return(
             <section className='h-[89vh] flex justify-center items-center flex-col gap-3'>
+                {/* Title */}
                 <h2 className='text-4xl'>Seu carrinho esta vazio</h2>
+
+                {/* Link to return home */}
                 <Link to='/' className='flex items-center gap-2'><SlActionUndo/> Voltar</Link>
             </section>
         )
@@ -100,9 +103,9 @@ export default function Carrinho(){
                         </section>
                     </article>
     
+                    {/* Finish purchase */}
                     {cartProduct.length > 0 && <PartOfThePurchase cartTotalValue={cartTotalValue}/>}
     
-                    {/* finalizar compra */}
                 </section>
     
             </section>
