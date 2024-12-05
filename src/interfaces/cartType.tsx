@@ -1,6 +1,6 @@
-import { Users } from './homeTypes'
+import { ProductsProps } from './homeTypes'
 
-export interface ProductType{
+export interface ProductsPropsCart{
     name:string,
     img:string,
     price:number,
@@ -8,8 +8,8 @@ export interface ProductType{
     amount:number,
     index:number,
     setCartTotalValue:React.Dispatch<React.SetStateAction<number>>,
-    cartProduct:Users[],
-    setCartProduct:React.Dispatch<React.SetStateAction<Users[]>>,
+    cartProduct:ProductsProps[],
+    setCartProduct:React.Dispatch<React.SetStateAction<ProductsProps[]>>,
     setCartValue:React.Dispatch<React.SetStateAction<object[]>>
 }
 

@@ -4,24 +4,17 @@ import {useState, useEffect} from 'react'
 // import React router dom
 import  {Link} from 'react-router-dom'
 
+// Components
+import { SumaryProduct } from '../../Components/Produto/sumary-product'
+
 // import Context
 import { UseStatesProps} from '../../Context/context'
 
 // import Icons
 import { SlActionUndo } from "react-icons/sl"
 
-
-interface Users {
-    category:string,
-    description:string,
-    id:string,
-    image_url:string,
-    name:string,
-    price_in_cents:number,
-    priceAtually:number,
-    sales:number,
-    amount:number,
-}
+// Interfae
+import { ProductsProps } from '../../interfaces/homeTypes'
 
 
 export default function Produto(){
@@ -41,7 +34,7 @@ export default function Produto(){
     },[])
 
     // state do produto
-    const [produto, setProduto] = useState<Users>()
+    const [produto, setProduto] = useState<ProductsProps>()
 
     // state - global cartValue
     const {setCartValue} = UseStatesProps()
@@ -53,13 +46,13 @@ export default function Produto(){
         const localStorageCart:unknown = localStorage.getItem('@cartProduct')
 
         // Transformando os dados da localStorage de string para dados javascript.
-        const cart:Users[] = JSON.parse(localStorageCart as string)        
+        const cart:ProductsProps[] = JSON.parse(localStorageCart as string)        
 
         // Jogando para dentro do cart o meu produto
         if(cart.some(item => item.name === produto?.name) === false){
 
             // Jogando para dentro do cart o meu produto
-            cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80),priceAtually:Math.ceil(produto?.price_in_cents as number / 80), amount:1} as Users)
+            cart.push({image_url:produto?.image_url, name:produto?.name, price_in_cents:Math.ceil(produto?.price_in_cents as number / 80),priceAtually:Math.ceil(produto?.price_in_cents as number / 80), amount:1} as ProductsProps)
 
             // setando valor no cartValue
             setCartValue(cart)
@@ -89,7 +82,7 @@ export default function Produto(){
     }
 
     return(
-        <section className='p-2 h-screen'>
+        <section className='p-2 min-h-screen'>
 
             {/* Link de navegacao */}
             <Link to='/' className='my-5 flex items-center gap-2'><SlActionUndo/> Voltar</Link>
@@ -103,25 +96,11 @@ export default function Produto(){
                 </figure>
 
                 <section id='informacoes' className='flex flex-col justify-between'>
-                    <article id='descricao'>
-
-                        {/* Categoria */}
-                        <p className='mb-4'>{produto?.name.includes('Camiseta') ? 'Camiseta' : 'Canecas'}</p>
-
-                        {/* Titulo */}
-                        <h1 className='text-4xl mb-3'>{produto?.name}</h1>
-
-                        {/* Preco */}
-                        <h2 className='text-2xl'><strong>R$ {Math.ceil((produto?.price_in_cents as number) / 80).toFixed(2).replace('.',',')}</strong></h2>
-                            
-                        {/* Frete */}
-                        <p className='text-xs mt-10 text-justify'>Frete de R$ 40,00 para todo o Brasil. Gratis para compras acima de R$ 90,00</p>
-
-                        {/* informacoes do produto */}
-                        <h2 className='mt-20 text-xl mb-2 md:text-3xl'>Descricao</h2>
-                        <p className='text-sm w-6/6 text-justify md:w-96'>Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto. </p>
-                        
-                    </article>
+                    {/* Sumary */}
+                    <SumaryProduct 
+                        name={produto?.name as string} 
+                        price={produto?.price_in_cents as number}
+                    />
                     
                     <button  id='buttonAddCar' className='bg-blue-900 h-12 rounded-sm text-white font-bold mt-5' onClick={addCart}>Adicionar ao carrinho</button>
                 </section>

@@ -99,6 +99,9 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
         }
     }
 
+    // Price Formated 
+    const priceFormated = price.toFixed(2)
+
     return (
         <article className='flex items-center mt-4 mb-4 bg-white rounded-md lg:w-11/12 '>
             {/* div contendo a imagem */}
@@ -111,7 +114,10 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
             
                 {/* titulo e icon */}
                 <article id='titulo' className='flex items-center justify-between'>
+                    {/* Title */}
                     <h2>{name}</h2>
+
+                    {/* Icon detele */}
                     <MdOutlineDeleteForever cursor='pointer' size={22} onClick={removeItem}/>
                 </article>
 
@@ -128,7 +134,8 @@ export const Product = ({img, name, price, amount, index, cartProduct, setCartPr
                         onChange={(e) => updateValue(e.target.value)}
                     />
 
-                    <strong>R$ {price.toFixed(2)}</strong>
+                    {/* Price Product */}
+                    <strong>R$ {priceFormated}</strong>
                 </section>
             </section>
         </article>

@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom'
 
 // imports interfaces
-import { ProdutoProps } from '../interfaces/homeTypes'
+import { ProdutoProps } from '../../../interfaces/homeTypes'
 
 export const Produto = ({img,name,price}:ProdutoProps) => {
     // Navigate
