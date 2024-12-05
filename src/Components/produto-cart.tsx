@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 
 // import Interfaces
 import { ProductsProps } from '../interfaces/homeTypes'
-import { ProductType } from '../interfaces/cartType'
+import { ProductsPropsCart } from '../interfaces/cartType'
 
 // import react-icons
 import { MdOutlineDeleteForever } from "react-icons/md"
 
-export const Product = ({img, name, price, amount, index, cartProduct, setCartProduct, setCartTotalValue, priceAtually, setCartValue}:ProductType) => {
+export const Product = ({img, name, price, amount, index, cartProduct, setCartProduct, setCartTotalValue, priceAtually, setCartValue}:ProductsPropsCart) => {
     // Usando o use effect para setar a referencia a state amountRef
     useEffect(() => {
         setAmountRef(amount)
