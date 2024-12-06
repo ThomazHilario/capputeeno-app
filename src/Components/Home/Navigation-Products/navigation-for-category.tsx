@@ -19,7 +19,7 @@ export const NavigationForCategory = () => {
     const buttonSelectStyleForTailwind = 'border-b-2 border-orange-500'
 
     return( 
-        <div className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
+        <section role='tabs-category' className='flex justify-evenly mb-2 sm:justify-start sm:gap-2 md:mb-0'>
             <button value='all' className={`${buttonStyleForTailwind} ${category === 'all' && buttonSelectStyleForTailwind}`} onClick={() => changeCategoryAndPage('all')}>Todos os produtos</button>
 
             <button className={`${buttonStyleForTailwind} ${category === 't-shirts' && buttonSelectStyleForTailwind}`} 
@@ -27,6 +27,6 @@ export const NavigationForCategory = () => {
 
             <button className={`${buttonStyleForTailwind} ${category === 'mugs' && buttonSelectStyleForTailwind}`} onClick={() => changeCategoryAndPage('mugs')}>Canecas</button>
 
-        </div>
+        </section>
 )
 }
