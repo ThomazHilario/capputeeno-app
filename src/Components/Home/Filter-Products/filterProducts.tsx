@@ -11,12 +11,12 @@ export const FilterProducts = () => {
 
     return(
         <Select.Root onValueChange={(value) => setSort(value)}>
-            <Select.Trigger className='outline-none p-1 w-full sm:w-56 bg-white rounded-sm text-black'>
+            <Select.Trigger role='btn-select-trigger' className='outline-none p-1 w-full sm:w-56 bg-white rounded-sm text-black'>
                 <Select.Value placeholder='Organizar Por'/>
             </Select.Trigger>
             
             
-            <Select.Content className='mt-1 w-[91.5vw] sm:w-[224px] rounded-sm' position='popper'>
+            <Select.Content role='filter-content' className='mt-1 w-[91.5vw] sm:w-[224px] rounded-sm' position='popper'>
                     <Select.Group className='bg-white'>
                         <Select.Item value='desc' className='p-1 cursor-pointer'>
                             <Select.ItemText>Maior Preço</Select.ItemText>
