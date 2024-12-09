@@ -16,6 +16,7 @@ import { ProductsProps } from '../../interfaces/homeTypes'
 import { store } from '../../Store/store'
 
 // import Components
+import { Loading } from '../../Components/UI/loading'
 import { Produto } from '../../Components/Home/Product/produtoCard'
 import { NavigationForCategory } from '../../Components/Home/Navigation-Products/navigation-for-category'
 import { FilterProducts } from '../../Components/Home/Filter-Products/filterProducts'
@@ -66,9 +67,9 @@ export default function Home(){
 
    if(carregado){
     return (
-    <section className='h-screen flex justify-center items-center'>
-        <h1>Carregando</h1>
-    </section>
+        <section className='h-screen flex justify-center items-center'>
+            <Loading/>
+        </section>
     )
 
    } else{
