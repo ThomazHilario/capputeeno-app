@@ -9,7 +9,7 @@ import './index.css'
 
 // import Components
 import RoutesNavegation from './Routes/routes'
-import { Header } from './Components/header'
+import { Header } from './Components/Header/header'
 
 function App() {
 
