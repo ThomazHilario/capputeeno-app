@@ -16,6 +16,9 @@ import { SlActionUndo } from "react-icons/sl"
 // Interfae
 import { ProductsProps } from '../../interfaces/homeTypes'
 
+// Components
+import { Loading } from '../../Components/UI/loading'
+
 
 export default function Produto(){
 
@@ -24,14 +27,23 @@ export default function Produto(){
        
         // Funcao para buscar produto especifico
          function loadProduto(){
+            // Get product in localstorage
             const produto = localStorage.getItem('@item') as string
+
+            // Set product object in state produto
             setProduto(JSON.parse(produto))
+
+            // Set false in isLoading state
+            setIsLoading(false)
         }
 
         // Chamando a funcao
         loadProduto()
 
     },[])
+
+    // state - isLoading
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     // state do produto
     const [produto, setProduto] = useState<ProductsProps>()
@@ -79,6 +91,15 @@ export default function Produto(){
             localStorage.setItem('@cartProduct',JSON.stringify(cart))
         }
     
+    }
+
+    // Case be loading
+    if(isLoading){
+        return(
+            <section className='min-h-screen flex justify-center items-center'>
+                <Loading/>
+            </section>
+        )
     }
 
     return(

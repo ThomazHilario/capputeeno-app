@@ -1,3 +1,4 @@
+// Css import
 import '../../index.css'
 
 // Import react
@@ -9,13 +10,13 @@ import { UseStatesProps } from '../../Context/context'
 // Axios
 import { getData } from '../../Service/api-request'
 
-// Import Interface
+// Interface
 import { ProductsProps } from '../../interfaces/homeTypes'
 
 // Store
 import { store } from '../../Store/store'
 
-// import Components
+// Components
 import { Loading } from '../../Components/UI/loading'
 import { Produto } from '../../Components/Home/Product/produtoCard'
 import { NavigationForCategory } from '../../Components/Home/Navigation-Products/navigation-for-category'
@@ -38,7 +39,7 @@ export default function Home(){
     const listFilter = products.filter(products => products.name.toLowerCase().includes(seach.toLowerCase()) && products)
     
     // state - carregado
-    const [carregado, setCarregado] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
     // State - totalPages
     const [totalPages, setTotalPages] = useState<number[]>([])
@@ -56,7 +57,7 @@ export default function Home(){
                 setTotalPages(response?.data.totalPage)
 
                 // Alterando a state carregado para true
-                setCarregado(false)
+                setIsLoading(false)
             } catch (e) {
                 console.log(e)
             }
@@ -65,7 +66,7 @@ export default function Home(){
         loadProducts()
     },[page, sort, category])
 
-   if(carregado){
+   if(isLoading){
     return (
         <section className='h-screen flex justify-center items-center'>
             <Loading/>
