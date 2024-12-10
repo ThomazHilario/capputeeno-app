@@ -94,13 +94,7 @@ export default function Produto(){
     }
 
     // Case be loading
-    if(isLoading){
-        return(
-            <section className='min-h-screen flex justify-center items-center'>
-                <Loading/>
-            </section>
-        )
-    }
+    if(isLoading) return <Loading/>   
 
     return(
         <section className='p-2 min-h-screen'>

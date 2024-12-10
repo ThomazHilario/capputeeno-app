@@ -66,46 +66,39 @@ export default function Home(){
         loadProducts()
     },[page, sort, category])
 
-   if(isLoading){
-    return (
-        <section className='h-screen flex justify-center items-center'>
-            <Loading/>
-        </section>
-    )
+   if(isLoading) return <Loading/>
+   
+    return(
+        <section className='w-11/12 sm:w-9/12 md:w-10/12 lg:w-9/12'>
 
-   } else{
-        return(
-            <section className='w-11/12 sm:w-9/12 md:w-10/12 lg:w-9/12'>
-
-                {/* navegacao dos produtos */}
-                <aside className='mt-8 flex flex-col md:flex-row justify-between'>
-                    {/* buttons */}
+            {/* navegacao dos produtos */}
+            <aside className='mt-8 flex flex-col md:flex-row justify-between'>
+                {/* buttons */}
+                
+                <NavigationForCategory/>
                     
-                    <NavigationForCategory/>
-                        
 
-                    {/* Filtro dos produtos */}
-                    <FilterProducts/>
+                {/* Filtro dos produtos */}
+                <FilterProducts/>
 
-                </aside>
+            </aside>
 
-                <NavegationProgress totalPages={totalPages}/>
+            <NavegationProgress totalPages={totalPages}/>
 
-                {/* Container dos produtos listados */}
-                <section id='container_produtos' className='min-h-screen mt-8 mb-12 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4' >
+            {/* Container dos produtos listados */}
+            <section id='container_produtos' className='min-h-screen mt-8 mb-12 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4' >
 
-                    {/* Percorrendo cada produto */}
-                    {listFilter.map((item, idx) => (
-                        <Produto 
-                            key={idx} 
-                            img={item.image_url} 
-                            name={item.name} 
-                            price={item.price_in_cents}/>
-                    ))}
-
-                </section>
+                {/* Percorrendo cada produto */}
+                {listFilter.map((item, idx) => (
+                    <Produto 
+                        key={idx} 
+                        img={item.image_url} 
+                        name={item.name} 
+                        price={item.price_in_cents}/>
+                ))}
 
             </section>
-        )
-   }
+
+        </section>
+    )
 }
