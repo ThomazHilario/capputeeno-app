@@ -8,7 +8,7 @@ import { MenuMobile } from './Menu/Mobile/menu-mobile'
 export const Header = () => {
 
   return(
-    <header className='h-20 pr-1 pl-1 bg-white flex justify-between items-center md:justify-between md:pr-20 md:pl-20' id='cabecalho'>
+    <header role='header' className='h-20 pr-1 pl-1 bg-white flex justify-between items-center md:justify-between md:pr-20 md:pl-20' id='cabecalho'>
 
       {/* titulo logo */}
       <Link to='/'>

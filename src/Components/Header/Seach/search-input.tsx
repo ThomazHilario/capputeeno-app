@@ -14,7 +14,7 @@ export const SeachInput = () => {
     }
 
     return(
-        <form className="min-w-[300px]" onSubmit={(e) => cancelPageRefreshing(e)}>
+        <form role="seach-input" className="min-w-[300px]" onSubmit={(e) => cancelPageRefreshing(e)}>
             <input type='text' value={seach} placeholder='Procurando por algo em especifico?' onChange={(e) => setSeach(e.target.value)} className='w-full p-1 pl-4 bg-gray-100 rouded-sm'/>
         </form>
     )

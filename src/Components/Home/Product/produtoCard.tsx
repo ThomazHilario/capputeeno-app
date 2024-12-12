@@ -24,7 +24,7 @@ export const Produto = ({img,name,price}:ProdutoProps) => {
     const priceProduct = Math.ceil(price / 80).toFixed(2).replace('.',',')
 
     return(
-        <article className='cursor-pointer bg-gray-100 rounded-t-lg font-saira' onClick={navegationPage}>
+        <article role='product-card' className='cursor-pointer bg-gray-100 rounded-t-lg font-saira' onClick={navegationPage}>
 
                 {/* imagem do produto */}
                 <img src={img} alt='imagem do produto' className='h-auto rounded-t-lg'/>
