@@ -20,7 +20,7 @@ export const MenuMobile = () => {
             <Dialog.Portal>
                 <Dialog.Overlay className='fixed bg-black/20'/>
 
-                <Dialog.Content className='absolute top-36 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/40 min-w-[90%] rounded-md min-h-0 md:hidden py-3 px-2'>
+                <Dialog.Content role='menu-mobile-content' className='absolute top-36 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/40 min-w-[90%] rounded-md min-h-0 md:hidden py-3 px-2'>
 
                     {/* Accessibility */}
                     <VisuallyHidden>
@@ -37,7 +37,7 @@ export const MenuMobile = () => {
                     </VisuallyHidden>
 
                     {/* Close Menu */}
-                    <Dialog.Close className='absolute right-1 top-1'>
+                    <Dialog.Close role='close-dialog-content' className='absolute right-1 top-1'>
                         <LuX color='white' size={30}/>
                     </Dialog.Close>
 
