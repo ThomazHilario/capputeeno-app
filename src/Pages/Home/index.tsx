@@ -73,16 +73,17 @@ export default function Home(){
 
             {/* navegacao dos produtos */}
             <aside className='mt-8 flex flex-col md:flex-row justify-between'>
-                {/* buttons */}
-                
+
+                {/* Navegation product for category */}
                 <NavigationForCategory/>
                     
 
-                {/* Filtro dos produtos */}
+                {/* Sort products */}
                 <FilterProducts/>
 
             </aside>
 
+            {/* Steps navegation products */}
             <NavegationProgress totalPages={totalPages}/>
 
             {/* Container dos produtos listados */}
