@@ -47,7 +47,6 @@ export default function Home(){
     useEffect(() => {
         async function loadProducts(){
             try {
-                console.log(category)
                 const response = await getData(12, page, sort, category)
                 
                 // Armazenando o resultado na state lista
